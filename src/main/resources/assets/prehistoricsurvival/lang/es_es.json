@@ -1,0 +1,15 @@
+{
+  "itemGroup.prehistoricsurvival": "Prehistoric Survival",
+  "entity.prehistoricsurvival.dodo": "Dodo",
+  "item.prehistoricsurvival.raw_dino_meat": "Carne de dinosaurio cruda",
+  "item.prehistoricsurvival.cooked_dino_meat": "Carne de dinosaurio asada",
+  "item.prehistoricsurvival.dodo_feather": "Pluma de dodo",
+  "item.prehistoricsurvival.dodo_spawn_egg": "Huevo generador de dodo",
+  "prehistoricsurvival.label.alpha": "Alfa",
+  "prehistoricsurvival.label.taming": "Domesticando %s%%",
+  "subtitles.prehistoricsurvival.entity.dodo.ambient": "El dodo grazna",
+  "subtitles.prehistoricsurvival.entity.dodo.hurt": "El dodo chilla de dolor",
+  "subtitles.prehistoricsurvival.entity.dodo.death": "El dodo muere",
+  "subtitles.prehistoricsurvival.entity.dodo.alert": "El dodo da la alarma",
+  "subtitles.prehistoricsurvival.entity.dodo.chick": "Una cría de dodo pía"
+}

@@ -1,0 +1,15 @@
+{
+  "itemGroup.prehistoricsurvival": "Prehistoric Survival",
+  "entity.prehistoricsurvival.dodo": "Dodo",
+  "item.prehistoricsurvival.raw_dino_meat": "Raw Dino Meat",
+  "item.prehistoricsurvival.cooked_dino_meat": "Cooked Dino Meat",
+  "item.prehistoricsurvival.dodo_feather": "Dodo Feather",
+  "item.prehistoricsurvival.dodo_spawn_egg": "Dodo Spawn Egg",
+  "prehistoricsurvival.label.alpha": "Alpha",
+  "prehistoricsurvival.label.taming": "Taming %s%%",
+  "subtitles.prehistoricsurvival.entity.dodo.ambient": "Dodo calls",
+  "subtitles.prehistoricsurvival.entity.dodo.hurt": "Dodo squawks in pain",
+  "subtitles.prehistoricsurvival.entity.dodo.death": "Dodo dies",
+  "subtitles.prehistoricsurvival.entity.dodo.alert": "Dodo raises the alarm",
+  "subtitles.prehistoricsurvival.entity.dodo.chick": "Dodo chick peeps"
+}

@@ -1,0 +1,22 @@
+{
+  "entity.dodo.ambient": {
+    "subtitle": "subtitles.prehistoricsurvival.entity.dodo.ambient",
+    "sounds": ["prehistoricsurvival:dodo/ambient1", "prehistoricsurvival:dodo/ambient2", "prehistoricsurvival:dodo/ambient3"]
+  },
+  "entity.dodo.hurt": {
+    "subtitle": "subtitles.prehistoricsurvival.entity.dodo.hurt",
+    "sounds": ["prehistoricsurvival:dodo/hurt1", "prehistoricsurvival:dodo/hurt2"]
+  },
+  "entity.dodo.death": {
+    "subtitle": "subtitles.prehistoricsurvival.entity.dodo.death",
+    "sounds": ["prehistoricsurvival:dodo/death1"]
+  },
+  "entity.dodo.alert": {
+    "subtitle": "subtitles.prehistoricsurvival.entity.dodo.alert",
+    "sounds": ["prehistoricsurvival:dodo/alert1", "prehistoricsurvival:dodo/alert2"]
+  },
+  "entity.dodo.chick": {
+    "subtitle": "subtitles.prehistoricsurvival.entity.dodo.chick",
+    "sounds": ["prehistoricsurvival:dodo/chick1", "prehistoricsurvival:dodo/chick2"]
+  }
+}
