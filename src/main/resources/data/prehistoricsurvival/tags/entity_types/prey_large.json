@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "prehistoricsurvival:dodo",
+    "prehistoricsurvival:velociraptor",
+    "minecraft:cow",
+    "minecraft:sheep",
+    "minecraft:pig",
+    "minecraft:horse",
+    "minecraft:donkey",
+    "minecraft:llama",
+    "minecraft:goat",
+    "minecraft:chicken",
+    "minecraft:rabbit"
+  ]
+}

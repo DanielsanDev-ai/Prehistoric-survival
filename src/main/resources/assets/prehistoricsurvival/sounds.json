@@ -1,0 +1,135 @@
+{
+  "entity.dodo.alert": {
+    "subtitle": "subtitles.prehistoricsurvival.entity.dodo.alert",
+    "sounds": [
+      "prehistoricsurvival:dodo/alert1",
+      "prehistoricsurvival:dodo/alert2"
+    ]
+  },
+  "entity.dodo.ambient": {
+    "subtitle": "subtitles.prehistoricsurvival.entity.dodo.ambient",
+    "sounds": [
+      "prehistoricsurvival:dodo/ambient1",
+      "prehistoricsurvival:dodo/ambient2",
+      "prehistoricsurvival:dodo/ambient3"
+    ]
+  },
+  "entity.dodo.chick": {
+    "subtitle": "subtitles.prehistoricsurvival.entity.dodo.chick",
+    "sounds": [
+      "prehistoricsurvival:dodo/chick1",
+      "prehistoricsurvival:dodo/chick2"
+    ]
+  },
+  "entity.dodo.death": {
+    "subtitle": "subtitles.prehistoricsurvival.entity.dodo.death",
+    "sounds": [
+      "prehistoricsurvival:dodo/death1"
+    ]
+  },
+  "entity.dodo.hurt": {
+    "subtitle": "subtitles.prehistoricsurvival.entity.dodo.hurt",
+    "sounds": [
+      "prehistoricsurvival:dodo/hurt1",
+      "prehistoricsurvival:dodo/hurt2"
+    ]
+  },
+  "entity.tyrannosaurus.ambient": {
+    "subtitle": "subtitles.prehistoricsurvival.entity.tyrannosaurus.ambient",
+    "sounds": [
+      "prehistoricsurvival:tyrannosaurus/ambient1",
+      "prehistoricsurvival:tyrannosaurus/ambient2",
+      "prehistoricsurvival:tyrannosaurus/ambient3"
+    ]
+  },
+  "entity.tyrannosaurus.attack": {
+    "subtitle": "subtitles.prehistoricsurvival.entity.tyrannosaurus.attack",
+    "sounds": [
+      "prehistoricsurvival:tyrannosaurus/attack1",
+      "prehistoricsurvival:tyrannosaurus/attack2"
+    ]
+  },
+  "entity.tyrannosaurus.chick": {
+    "subtitle": "subtitles.prehistoricsurvival.entity.tyrannosaurus.chick",
+    "sounds": [
+      "prehistoricsurvival:tyrannosaurus/chick1",
+      "prehistoricsurvival:tyrannosaurus/chick2"
+    ]
+  },
+  "entity.tyrannosaurus.death": {
+    "subtitle": "subtitles.prehistoricsurvival.entity.tyrannosaurus.death",
+    "sounds": [
+      "prehistoricsurvival:tyrannosaurus/death1"
+    ]
+  },
+  "entity.tyrannosaurus.hurt": {
+    "subtitle": "subtitles.prehistoricsurvival.entity.tyrannosaurus.hurt",
+    "sounds": [
+      "prehistoricsurvival:tyrannosaurus/hurt1",
+      "prehistoricsurvival:tyrannosaurus/hurt2"
+    ]
+  },
+  "entity.tyrannosaurus.step": {
+    "subtitle": "subtitles.prehistoricsurvival.entity.tyrannosaurus.step",
+    "sounds": [
+      "prehistoricsurvival:tyrannosaurus/step1",
+      "prehistoricsurvival:tyrannosaurus/step2"
+    ]
+  },
+  "entity.tyrannosaurus.warn": {
+    "subtitle": "subtitles.prehistoricsurvival.entity.tyrannosaurus.warn",
+    "sounds": [
+      "prehistoricsurvival:tyrannosaurus/warn1",
+      "prehistoricsurvival:tyrannosaurus/warn2"
+    ]
+  },
+  "entity.velociraptor.ambient": {
+    "subtitle": "subtitles.prehistoricsurvival.entity.velociraptor.ambient",
+    "sounds": [
+      "prehistoricsurvival:velociraptor/ambient1",
+      "prehistoricsurvival:velociraptor/ambient2",
+      "prehistoricsurvival:velociraptor/ambient3"
+    ]
+  },
+  "entity.velociraptor.attack": {
+    "subtitle": "subtitles.prehistoricsurvival.entity.velociraptor.attack",
+    "sounds": [
+      "prehistoricsurvival:velociraptor/attack1",
+      "prehistoricsurvival:velociraptor/attack2"
+    ]
+  },
+  "entity.velociraptor.call": {
+    "subtitle": "subtitles.prehistoricsurvival.entity.velociraptor.call",
+    "sounds": [
+      "prehistoricsurvival:velociraptor/call1",
+      "prehistoricsurvival:velociraptor/call2"
+    ]
+  },
+  "entity.velociraptor.chick": {
+    "subtitle": "subtitles.prehistoricsurvival.entity.velociraptor.chick",
+    "sounds": [
+      "prehistoricsurvival:velociraptor/chick1",
+      "prehistoricsurvival:velociraptor/chick2"
+    ]
+  },
+  "entity.velociraptor.death": {
+    "subtitle": "subtitles.prehistoricsurvival.entity.velociraptor.death",
+    "sounds": [
+      "prehistoricsurvival:velociraptor/death1"
+    ]
+  },
+  "entity.velociraptor.hurt": {
+    "subtitle": "subtitles.prehistoricsurvival.entity.velociraptor.hurt",
+    "sounds": [
+      "prehistoricsurvival:velociraptor/hurt1",
+      "prehistoricsurvival:velociraptor/hurt2"
+    ]
+  },
+  "entity.velociraptor.warn": {
+    "subtitle": "subtitles.prehistoricsurvival.entity.velociraptor.warn",
+    "sounds": [
+      "prehistoricsurvival:velociraptor/warn1",
+      "prehistoricsurvival:velociraptor/warn2"
+    ]
+  }
+}

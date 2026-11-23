@@ -1,0 +1,30 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:wolf",
+    "minecraft:fox",
+    "minecraft:ocelot",
+    "prehistoricsurvival:velociraptor",
+    "prehistoricsurvival:tyrannosaurus",
+    {
+      "id": "prehistoricsurvival:dilophosaurus",
+      "required": false
+    },
+    {
+      "id": "prehistoricsurvival:carnotaurus",
+      "required": false
+    },
+    {
+      "id": "prehistoricsurvival:spinosaurus",
+      "required": false
+    },
+    {
+      "id": "prehistoricsurvival:compsognathus",
+      "required": false
+    },
+    {
+      "id": "prehistoricsurvival:titanoboa",
+      "required": false
+    }
+  ]
+}

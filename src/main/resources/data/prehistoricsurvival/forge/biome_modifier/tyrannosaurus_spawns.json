@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#prehistoricsurvival:tyrannosaurus_habitat",
+  "spawners": {
+    "type": "prehistoricsurvival:tyrannosaurus",
+    "weight": 1,
+    "minCount": 1,
+    "maxCount": 1
+  }
+}

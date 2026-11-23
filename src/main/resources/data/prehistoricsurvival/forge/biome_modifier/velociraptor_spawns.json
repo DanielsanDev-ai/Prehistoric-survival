@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#prehistoricsurvival:velociraptor_habitat",
+  "spawners": {
+    "type": "prehistoricsurvival:velociraptor",
+    "weight": 4,
+    "minCount": 2,
+    "maxCount": 4
+  }
+}

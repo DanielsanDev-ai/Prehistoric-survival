@@ -1,0 +1,27 @@
+package com.prehistoricsurvival.registry;
+
+import com.prehistoricsurvival.PrehistoricSurvival;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.EntityType;
+
+public final class ModTags {
+    /** Criaturas de las que huyen los herbivoros pequenos. Editable por datapack. */
+    public static final TagKey<EntityType<?>> PREDATORS =
+            TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(PrehistoricSurvival.MOD_ID, "predators"));
+
+    /** Presas de los depredadores pequenos (velociraptor). */
+    public static final TagKey<EntityType<?>> SMALL_PREY =
+            TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(PrehistoricSurvival.MOD_ID, "prey_small"));
+
+    /** Presas de los grandes depredadores (T. rex). */
+    public static final TagKey<EntityType<?>> LARGE_PREY =
+            TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(PrehistoricSurvival.MOD_ID, "prey_large"));
+
+    /** Superdepredadores: hasta los otros depredadores huyen de ellos. */
+    public static final TagKey<EntityType<?>> APEX_PREDATORS =
+            TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(PrehistoricSurvival.MOD_ID, "apex_predators"));
+
+    private ModTags() {}
+}
