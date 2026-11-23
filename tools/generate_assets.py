@@ -255,7 +255,9 @@ def main():
     icon_meat(True).save(os.path.join(TEX_ITEM, "cooked_dino_meat.png"))
     icon_feather().save(os.path.join(TEX_ITEM, "dodo_feather.png"))
     make_sounds()
-    print("Texturas y sonidos generados en", ASSETS)
+    import theropods
+    theropods.run()
+    print("Texturas, modelos y sonidos generados en", ASSETS)
 
 
 if __name__ == "__main__":

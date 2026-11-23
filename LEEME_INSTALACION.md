@@ -1,40 +1,40 @@
-# Prehistoric Survival — v0.1.0 (base técnica + Dodo)
+# Prehistoric Survival — v0.2.0 (huevos y nidos + Velociraptor + T. rex)
 
 Minecraft Java **1.20.1** · Forge **47.3.0** · Java **17**
 
-> ⚠️ Esta versión **no ha sido compilada ni probada dentro de Minecraft**. Fue escrita en un entorno sin
-> Forge, sin Gradle y sin internet. Es muy probable que el primer intento de compilar muestre algún error
-> pequeño; pásame el texto del error y lo corrijo. Detalles en `ESTADO.md`.
+> ⚠️ La **v0.1.0 la compilaste y probaste tú y funciona**. La **v0.2.0 es nueva y NO ha sido compilada ni probada
+> por mí** (sigo sin compilador ni Forge en mi entorno). Si GitHub Actions marca error, copia el texto del error
+> y lo corrijo. Los cambios respecto a v0.1.0 están en `CHANGELOG.md`.
 
-## Cómo obtener el .jar (sin instalar nada) — GitHub Actions
+## Cómo obtener el .jar (igual que la vez anterior)
+1. Sube **toda la carpeta** a tu repositorio de GitHub sustituyendo los archivos (incluida la carpeta oculta `.github`).
+   Si GitHub ya tiene la v0.1.0, borra primero los archivos antiguos o sube encima: lo importante es que
+   `src/`, `tools/`, `build.gradle`, `gradle.properties` y `settings.gradle` sean los nuevos.
+2. Pestaña **Actions** → espera a que termine "Compilar mod" (en verde).
+3. Descarga el artefacto **prehistoric-survival-jar** → dentro está `prehistoricsurvival-0.2.0.jar`.
+4. Cópialo a la carpeta `mods` de Forge 1.20.1 (quita antes el .jar de la v0.1.0).
 
-1. Crea una cuenta gratuita en https://github.com y un repositorio nuevo (privado vale).
-2. Pulsa **Add file → Upload files** y arrastra **toda la carpeta del proyecto**
-   (importante que se suba también la carpeta oculta `.github`).
-3. Ve a la pestaña **Actions**. Verás el trabajo "Compilar mod" ejecutándose (tarda 5–10 min la primera vez).
-4. Si termina en verde, ábrelo y descarga el artefacto **prehistoric-survival-jar** (un .zip que contiene el `.jar`).
-5. Si termina en rojo, abre el paso "Compilar", copia el error y envíamelo.
+Tus dodos y mundos de la v0.1.0 **siguen funcionando** (los datos guardados son compatibles).
 
-## Cómo compilarlo en tu PC (alternativa)
+## Guía rápida de pruebas
+*Pestaña creativa **Prehistoric Survival**: huevos generadores, nido, huevos, objetos.*
 
-1. Instala **JDK 17** (Temurin) y **Gradle 8.1.1**.
-2. En la carpeta del proyecto: `gradle build`
-3. El `.jar` queda en `build/libs/prehistoricsurvival-0.1.0.jar`.
+| Qué probar | Cómo |
+|---|---|
+| **Tamaños reales** | Genera un dodo, un velociraptor y un T. rex juntos y compáralos (y al lado, un bebé de cada). |
+| **Domesticar dodo** | Semillas/bayas, varias veces (como antes). |
+| **Domesticar velociraptor** | **Agachado (Shift)** y con **carne cruda** en la mano, clic derecho, ~8 veces. De pie desconfía y pierde confianza. |
+| **Domesticar T. rex** | Craftea **carne sedante** (carne de dino cruda + ojo de araña fermentado + bayas dulces). Dásela: se duerme ~45 s. Mientras duerme, dale **carne cocinada** ~10 veces. Si se despierta, ¡te ataca! |
+| **Reproducción** | Un macho y una hembra adultos y bien alimentados (barra de hambre ≥70). Se aparean → gestación → la hembra busca un **nido** y pone un **huevo**. |
+| **Incubación** | El huevo solo avanza en **biomas cálidos** (jungla, llanura, sabana) o cerca de **hoguera/horno/magma**. Un **nido** debajo la acelera. Se ven grietas según avanza. |
+| **Recoger huevos** | Se pueden picar y transportar: conservan especie, genética y progreso. Se colocan en cualquier sitio. |
+| **Caza en manada** | Suelta 3 velociraptores y un dodo cerca. Acechan despacio y luego cargan, rodeando a la presa. |
+| **Comer la presa** | Tras abatirla, el depredador va a ella, la come con animación y deja huesos y restos. |
+| **Territorio** | Acércate a un T. rex: se gira, ruge, adopta postura amenazante; si te alejas se calma; si insistes, ataca. |
+| **Ruido** | Pelea con un mob a unos 40 bloques de un T. rex: viene a investigar. |
 
-## Cómo instalarlo en Minecraft
+Consejo: en **creativo** los depredadores no te atacan; para probar territorialidad usa **supervivencia**.
 
-1. Instala **Forge 1.20.1 (47.3.0 o superior)** con el instalador oficial.
-2. Copia el `.jar` a la carpeta `mods` de tu instancia de Minecraft.
-3. Abre Minecraft con el perfil de Forge, crea un mundo.
-
-## Cómo probar lo que hay
-
-* Pestaña creativa **Prehistoric Survival** → *Huevo generador de dodo*.
-* `/summon prehistoricsurvival:dodo` también funciona.
-* Aparecen de forma natural en junglas, bosques, llanuras y sabanas (grupos de 3–6).
-* Prueba: acércate de noche (duermen), mira a uno (nombre + nivel + vida), dale semillas (domesticación
-  progresiva: 4+ semillas), pégale a uno (los demás huyen y graznan), suelta un lobo cerca.
-
-## Regenerar texturas y sonidos
-
-`python3 tools/generate_assets.py` (necesita Pillow, numpy, scipy y ffmpeg).
+## Regenerar texturas, modelos y sonidos
+`python3 tools/generate_assets.py` (Pillow, numpy, scipy y ffmpeg). Esto también regenera
+`TheropodSpecs.java` (geometría del modelo) para que modelo y textura nunca se desincronicen.
