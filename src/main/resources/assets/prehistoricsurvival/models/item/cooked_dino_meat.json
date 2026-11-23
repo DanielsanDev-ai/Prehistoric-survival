@@ -1,4 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": { "layer0": "prehistoricsurvival:item/cooked_dino_meat" }
-}
