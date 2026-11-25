@@ -23,3 +23,14 @@ jobs:
         with:
           name: prehistoric-survival-jar
           path: build/libs/*.jar
+          if-no-files-found: error
+      - name: Empaquetar proyecto completo
+        run: |
+          mkdir -p build/distribution
+          git archive --format=zip --prefix=prehistoric-survival-0.3.0/ HEAD -o build/distribution/prehistoric-survival-0.3.0-project.zip
+      - name: Subir proyecto completo
+        uses: actions/upload-artifact@v4
+        with:
+          name: prehistoric-survival-0.3.0-project
+          path: build/distribution/prehistoric-survival-0.3.0-project.zip
+          if-no-files-found: error
