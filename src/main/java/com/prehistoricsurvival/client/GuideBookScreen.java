@@ -54,8 +54,12 @@ public class GuideBookScreen extends Screen {
             int y = top + 53;
             for (String line : page.lines()) {
                 if (y > bottom - 20) break;
-                g.drawString(font, Component.literal(line), left + 22, y, 0xFF332719, false);
-                y += 15;
+                for (var wrapped : font.split(Component.literal(line), right - left - 44)) {
+                    if (y > bottom - 20) break;
+                    g.drawString(font, wrapped, left + 22, y, 0xFF332719, false);
+                    y += 12;
+                }
+                y += 3;
             }
             g.drawCenteredString(font, Component.literal((pageIndex + 1) + " / " + pages.size()),
                     width / 2, bottom - 16, 0xFF675236);
