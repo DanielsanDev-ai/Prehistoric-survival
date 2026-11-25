@@ -21,6 +21,9 @@ public final class GuideBookPages {
         register(new Page("Prehistoric Survival", "CUADERNO DEL EXPLORADOR",
                 "Un registro de campo para estudiar, criar y domesticar las criaturas prehistoricas.",
                 "Version del contenido: 0.3.0", "Usa las flechas para recorrer las secciones."));
+        register(new Page("Indice", "1. Dodo", "2. Velociraptor", "3. Tyrannosaurus rex",
+                "4. Dilophosaurus", "5. Nidos, huevos e incubacion",
+                "6. Crecimiento", "7. Criaturas Alfa", "8. Consejos de campo"));
         register(new Page("Dodo", "Tipo: herbivoro tranquilo y gregario.",
                 "Habitat: llanuras y zonas abiertas.",
                 "Domesticacion: ofrece semillas o bayas varias veces.",
