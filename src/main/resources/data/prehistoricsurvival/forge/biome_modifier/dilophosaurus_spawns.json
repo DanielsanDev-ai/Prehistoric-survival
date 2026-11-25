@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#prehistoricsurvival:velociraptor_habitat",
+  "spawners": {
+    "type": "prehistoricsurvival:dilophosaurus",
+    "weight": 3,
+    "minCount": 1,
+    "maxCount": 2
+  }
+}
