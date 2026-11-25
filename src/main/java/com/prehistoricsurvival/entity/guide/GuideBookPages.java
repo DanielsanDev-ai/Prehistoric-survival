@@ -25,24 +25,25 @@ public final class GuideBookPages {
                 "4. Dilophosaurus", "5. Nidos, huevos e incubacion",
                 "6. Crecimiento", "7. Criaturas Alfa", "8. Consejos de campo"));
         register(new Page("Dodo", "Tipo: herbivoro tranquilo y gregario.",
-                "Habitat: llanuras y zonas abiertas.",
+                "Habitat: jungla, llanura, llanura de girasoles, bosque, bosque floral y sabana.",
                 "Domesticacion: ofrece semillas o bayas varias veces.",
                 "Alimentacion: semillas y bayas dulces.",
                 "Comportamiento: huye de los grandes depredadores y se mantiene cerca de su bandada.",
                 "Recurso: pluma de dodo."));
         register(new Page("Velociraptor", "Tipo: depredador carnivoro de manada.",
-                "Habitat: biomas calidos y abiertos.",
+                "Habitat: jungla, bosque, bosque floral, sabana y llanura.",
                 "Domesticacion: acercate agachado y ofrece carne cruda.",
                 "Alimentacion: carne cruda y presas pequeñas.",
                 "Comportamiento: acecha, carga y puede coordinarse con otros raptores.",
                 "Recurso: garra de raptor."));
         register(new Page("Tyrannosaurus rex", "Tipo: gran depredador territorial.",
-                "Habitat: regiones adecuadas para grandes depredadores.",
+                "Habitat: jungla, sabana y bosque.",
                 "Domesticacion: requiere el metodo de sedacion ya existente y alimento cocinado.",
                 "Alimentacion: carne y presas grandes.",
                 "Comportamiento: advierte antes de atacar, investiga ruidos y caza cuando tiene hambre.",
                 "Recurso: diente de T. rex."));
         register(new Page("Dilophosaurus", "Tipo: depredador carnivoro de tamaño mediano.",
+                "Habitat: jungla, bosque, bosque floral, sabana y llanura (usa los mismos biomas que el Velociraptor).",
                 "Rasgos: dos crestas craneales y gola extensible alrededor del cuello.",
                 "Domesticacion: acercate agachado y ofrece carne cruda.",
                 "Alimentacion: carne cruda y presas pequeñas.",
