@@ -1,4 +1,24 @@
 {
+  "entity.dilophosaurus.ambient": {
+    "subtitle": "subtitles.prehistoricsurvival.entity.dilophosaurus.ambient",
+    "sounds": ["prehistoricsurvival:velociraptor/ambient1", "prehistoricsurvival:velociraptor/ambient2"]
+  },
+  "entity.dilophosaurus.warn": {
+    "subtitle": "subtitles.prehistoricsurvival.entity.dilophosaurus.warn",
+    "sounds": ["prehistoricsurvival:velociraptor/warn1"]
+  },
+  "entity.dilophosaurus.attack": {
+    "subtitle": "subtitles.prehistoricsurvival.entity.dilophosaurus.attack",
+    "sounds": ["prehistoricsurvival:velociraptor/attack1"]
+  },
+  "entity.dilophosaurus.hurt": {
+    "subtitle": "subtitles.prehistoricsurvival.entity.dilophosaurus.hurt",
+    "sounds": ["prehistoricsurvival:velociraptor/hurt1"]
+  },
+  "entity.dilophosaurus.death": {
+    "subtitle": "subtitles.prehistoricsurvival.entity.dilophosaurus.death",
+    "sounds": ["prehistoricsurvival:velociraptor/death1"]
+  },
   "entity.dodo.alert": {
     "subtitle": "subtitles.prehistoricsurvival.entity.dodo.alert",
     "sounds": [
