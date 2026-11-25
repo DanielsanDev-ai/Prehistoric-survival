@@ -1,6 +1,8 @@
 package com.prehistoricsurvival.client;
 
+import com.prehistoricsurvival.PrehistoricSurvival;
 import com.prehistoricsurvival.entity.guide.GuideBookPages;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
@@ -8,6 +10,8 @@ import net.minecraft.network.chat.Component;
 
 /** Interfaz de enciclopedia con indice por paginas y navegacion simple. */
 public class GuideBookScreen extends Screen {
+    private static final ResourceLocation COVER = new ResourceLocation(
+            PrehistoricSurvival.MOD_ID, "textures/gui/field_guide_cover.png");
     private int pageIndex;
 
     public GuideBookScreen() {
@@ -48,18 +52,28 @@ public class GuideBookScreen extends Screen {
         var pages = GuideBookPages.all();
         if (!pages.isEmpty()) {
             var page = pages.get(pageIndex);
-            g.drawCenteredString(font, Component.literal(page.title()), width / 2, top + 20, 0xFF392615);
-            g.fill(left + 26, top + 39, right - 26, top + 40, 0xFF8A704C);
+            if (pageIndex == 0) {
+                g.blit(COVER, width / 2 - 120, top + 18, 0, 0, 240, 164, 256, 176);
+                g.drawCenteredString(font, Component.literal("PREHISTORIC SURVIVAL"),
+                        width / 2, top + 75, 0xFFFFE4A0);
+                g.drawCenteredString(font, Component.literal("CUADERNO DEL EXPLORADOR"),
+                        width / 2, top + 112, 0xFFFFE4A0);
+                g.drawCenteredString(font, Component.literal("ENCICLOPEDIA DE CAMPO · 0.3.0"),
+                        width / 2, top + 145, 0xFFE8D4A8);
+            } else {
+                g.drawCenteredString(font, Component.literal(page.title()), width / 2, top + 20, 0xFF392615);
+                g.fill(left + 26, top + 39, right - 26, top + 40, 0xFF8A704C);
 
-            int y = top + 53;
-            for (String line : page.lines()) {
-                if (y > bottom - 20) break;
-                for (var wrapped : font.split(Component.literal(line), right - left - 44)) {
+                int y = top + 53;
+                for (String line : page.lines()) {
                     if (y > bottom - 20) break;
-                    g.drawString(font, wrapped, left + 22, y, 0xFF332719, false);
-                    y += 12;
+                    for (var wrapped : font.split(Component.literal(line), right - left - 44)) {
+                        if (y > bottom - 20) break;
+                        g.drawString(font, wrapped, left + 22, y, 0xFF332719, false);
+                        y += 12;
+                    }
+                    y += 3;
                 }
-                y += 3;
             }
             g.drawCenteredString(font, Component.literal((pageIndex + 1) + " / " + pages.size()),
                     width / 2, bottom - 16, 0xFF675236);
