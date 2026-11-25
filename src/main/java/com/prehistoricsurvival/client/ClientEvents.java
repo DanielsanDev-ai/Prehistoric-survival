@@ -2,9 +2,11 @@ package com.prehistoricsurvival.client;
 
 import com.prehistoricsurvival.PrehistoricSurvival;
 import com.prehistoricsurvival.client.model.DodoModel;
+import com.prehistoricsurvival.client.model.DilophosaurusModel;
 import com.prehistoricsurvival.client.model.TheropodModel;
 import com.prehistoricsurvival.client.model.TheropodSpecs;
 import com.prehistoricsurvival.client.renderer.DodoRenderer;
+import com.prehistoricsurvival.client.renderer.DilophosaurusRenderer;
 import com.prehistoricsurvival.client.renderer.TyrannosaurusRenderer;
 import com.prehistoricsurvival.client.renderer.VelociraptorRenderer;
 import com.prehistoricsurvival.registry.ModEntities;
@@ -21,6 +23,7 @@ public final class ClientEvents {
         event.registerLayerDefinition(DodoModel.LAYER, DodoModel::createBodyLayer);
         event.registerLayerDefinition(TheropodModel.RAPTOR_LAYER, () -> TheropodModel.createLayer(TheropodSpecs.VELOCIRAPTOR));
         event.registerLayerDefinition(TheropodModel.REX_LAYER, () -> TheropodModel.createLayer(TheropodSpecs.TREX));
+        event.registerLayerDefinition(DilophosaurusModel.LAYER, DilophosaurusModel::createBodyLayer);
     }
 
     @SubscribeEvent
@@ -28,6 +31,7 @@ public final class ClientEvents {
         event.registerEntityRenderer(ModEntities.DODO.get(), DodoRenderer::new);
         event.registerEntityRenderer(ModEntities.VELOCIRAPTOR.get(), VelociraptorRenderer::new);
         event.registerEntityRenderer(ModEntities.TYRANNOSAURUS.get(), TyrannosaurusRenderer::new);
+        event.registerEntityRenderer(ModEntities.DILOPHOSAURUS.get(), DilophosaurusRenderer::new);
     }
 
     private ClientEvents() {}

@@ -26,6 +26,9 @@
     },
     "hatch=2,kind=2": {
       "model": "prehistoricsurvival:block/dino_egg_2_2"
-    }
+    },
+    "hatch=0,kind=3": { "model": "prehistoricsurvival:block/dino_egg_3_0" },
+    "hatch=1,kind=3": { "model": "prehistoricsurvival:block/dino_egg_3_1" },
+    "hatch=2,kind=3": { "model": "prehistoricsurvival:block/dino_egg_3_2" }
   }
 }

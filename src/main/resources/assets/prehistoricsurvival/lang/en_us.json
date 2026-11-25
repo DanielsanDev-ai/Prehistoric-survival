@@ -42,5 +42,14 @@
   "subtitles.prehistoricsurvival.entity.velociraptor.chick": "Velociraptor chick peeps",
   "subtitles.prehistoricsurvival.entity.velociraptor.death": "Velociraptor dies",
   "subtitles.prehistoricsurvival.entity.velociraptor.hurt": "Velociraptor cries in pain",
-  "subtitles.prehistoricsurvival.entity.velociraptor.warn": "Velociraptor warns"
+  "subtitles.prehistoricsurvival.entity.velociraptor.warn": "Velociraptor warns",
+  "entity.prehistoricsurvival.dilophosaurus": "Dilophosaurus",
+  "item.prehistoricsurvival.dilophosaurus_egg": "Dilophosaurus Egg",
+  "item.prehistoricsurvival.dilophosaurus_spawn_egg": "Dilophosaurus Spawn Egg",
+  "item.prehistoricsurvival.field_guide": "Prehistoric Survival Field Guide",
+  "subtitles.prehistoricsurvival.entity.dilophosaurus.ambient": "Dilophosaurus calls",
+  "subtitles.prehistoricsurvival.entity.dilophosaurus.warn": "Dilophosaurus spreads its frill and warns",
+  "subtitles.prehistoricsurvival.entity.dilophosaurus.attack": "Dilophosaurus attacks",
+  "subtitles.prehistoricsurvival.entity.dilophosaurus.hurt": "Dilophosaurus cries in pain",
+  "subtitles.prehistoricsurvival.entity.dilophosaurus.death": "Dilophosaurus dies"
 }

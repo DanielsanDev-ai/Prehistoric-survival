@@ -2,6 +2,7 @@ package com.prehistoricsurvival.registry;
 
 import com.prehistoricsurvival.PrehistoricSurvival;
 import com.prehistoricsurvival.entity.DodoEntity;
+import com.prehistoricsurvival.entity.DilophosaurusEntity;
 import com.prehistoricsurvival.entity.TyrannosaurusEntity;
 import com.prehistoricsurvival.entity.VelociraptorEntity;
 import net.minecraft.world.entity.EntityType;
@@ -33,6 +34,13 @@ public final class ModEntities {
                     .sized(2.2f, 4.4f)
                     .clientTrackingRange(16)
                     .build("tyrannosaurus"));
+
+    /** Dilophosaurus mediano, integrado con crianza y domesticacion. */
+    public static final RegistryObject<EntityType<DilophosaurusEntity>> DILOPHOSAURUS = ENTITIES.register("dilophosaurus",
+            () -> EntityType.Builder.of(DilophosaurusEntity::new, MobCategory.CREATURE)
+                    .sized(0.85f, 1.45f)
+                    .clientTrackingRange(12)
+                    .build("dilophosaurus"));
 
     private ModEntities() {}
 }

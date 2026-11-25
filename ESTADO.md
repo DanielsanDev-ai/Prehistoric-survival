@@ -1,61 +1,31 @@
-# Estado del proyecto — v0.2.0
+# Estado del proyecto — v0.3.0
 
-Última actualización: 23-nov-2026.
+Minecraft Java **1.20.1** · Forge **47.3.0** · Java **17**
 
-## Qué está verificado y qué no
-* **v0.1.0**: compilada y probada por el director creativo en Minecraft (dodo bebé/adulto/domesticación OK).
-* **v0.2.0 — comprobado en mi entorno (real)**: 48 JSON válidos; las 38 texturas y 38 sonidos `.ogg` existen y
-  se inspeccionaron/decodificaron; cada modelo, textura, sonido y clave de idioma referenciados existe;
-  todos los `import` internos resuelven; llaves y paréntesis equilibrados en los 43 archivos Java.
-* **v0.2.0 — NO comprobado**: que **compile** (sin Forge ni `javac` aquí), que las animaciones/modelos se vean
-  bien en el juego, el equilibrio y el rendimiento. Todo lo de abajo está *escrito*, no *probado*.
+## Base conservada
+La v0.3.0 se desarrolla sobre el código completo de la v0.2.0 en la rama `v0.3.0-development`.
+Se conservan Dodo, Velociraptor y Tyrannosaurus rex, sus entidades y modelos, IA, domesticación,
+seguimiento del dueño, reproducción, nidos, incubación, eclosión, herencia genética, crecimiento y guardado.
 
-## Implementado en la v0.2.0 (código y recursos existentes)
-**Especies**: Dodo (v0.1) · **Velociraptor** · **Tyrannosaurus rex**.
+## Añadido en v0.3.0
+- Libro de campo entregado una sola vez por jugador al entrar a un mundo.
+- Interfaz con portada visual de libro, índice, navegación, secciones por criatura y sistemas generales.
+- Registro central de páginas extensible con `GuideBookPages.register(...)`.
+- Nueva entidad Dilophosaurus, con atributos, comportamiento depredador, domesticación por sigilo y seguimiento del dueño.
+- Modelo específico del Dilophosaurus con dos crestas, gola desplegable, animación de amenaza y modelo de cría.
+- Huevo de Dilophosaurus registrado e integrado al bloque común de huevos, incubación, eclosión y herencia genética.
+- Spawn egg, aparición en biomas del hábitat de raptor, sonidos registrados y traducciones ES/EN.
+- Nombre Alfa, estadísticas y guardado siguen usando la base común de PrehistoricEntity.
 
-| | Dodo | Velociraptor | T. rex |
-|---|---|---|---|
-| Hitbox adulto | 0,5 × 1,0 | 0,6 × 0,9 | 2,2 × 4,4 |
-| Tamaño (modelo) | ~1 m | cadera ~0,5 m, ~1,7 m largo | cadera ~2,9 m, cabeza ~4,9 m, ~9 m largo |
-| Vida / daño | 12 / 1 | 28 / 5 | 160 / 22 |
-| Dieta | herbívoro | carnívoro (presas pequeñas) | carnívoro (presas grandes) |
-| Sociedad | bandada con alfa | manada, caza coordinada | solitario, territorial (18 bloques) |
-| Domesticación | **comida** (semillas) | **sigilo** (carne cruda agachado) | **sedación** (carne sedante + carne cocinada) |
-| Recurso único | pluma | garra de raptor | diente de T. rex |
-| Incubación / gestación | 9.000 / 3.000 ticks | 12.000 / 5.000 | 18.000 / 8.000 |
-| Etapas (bebé+juvenil) | 10 + 20 min | 10 + 15 min | 20 + 40 min |
+## Limitaciones conocidas
+- No se implementó el proyectil venenoso solicitado.
+- La gola se despliega cuando la criatura entra en estado de amenaza/agresividad; no existe una acción de combate remota nueva.
+- Los eventos de sonido del Dilophosaurus reutilizan temporalmente muestras ya existentes; no hay grabaciones originales.
+- El libro utiliza una interfaz de pergamino dibujada con paneles y colores; el icono de inventario tiene textura propia.
+- No se ha confirmado aún la compilación ni la apariencia en juego. La confirmación depende de GitHub Actions y prueba manual en Minecraft.
 
-**Sistemas nuevos**
-* Reproducción, huevos (bloque + objeto), nidos, incubación por calor, eclosión con genética, madre que vigila el nido.
-* IA de depredadores: caza con hambre, acecho y carga, flanqueo en manada, huida herido, comer cadáver, advertencia
-  territorial, investigar ruidos, dormir de noche (se despiertan si te acercas), sedación.
-* Los alfas sueltan Esencia alfa; los depredadores salvajes retienen el botín de sus presas y lo sueltan al comer.
-* Los herbívoros (dodo) huyen de velociraptor y T. rex; los raptores huyen del T. rex.
-
-## Pendiente (NO existe todavía)
-* Otras 10 especies: Dilophosaurus, Brachiosaurus, Parasaurolophus, Triceratops, Carnotaurus, Spinosaurus,
-  Compsognathus, Pachycephalosaurus, Titanoboa (+ el resto de la lista inicial).
-* Monturas, sillas, habilidades (clic derecho / R), órdenes avanzadas (defender zona…).
-* **Cadáver visible**: hoy la presa desaparece al morir y el depredador come en ese punto (animación sí; cuerpo no).
-* Padres que cazan y llevan comida a las crías; crías que siguen a sus padres concretos (hoy siguen a adultos de su especie).
-* Utilidad de los recursos (garra, diente, esencia): aún no hay armas, armaduras ni crafteos que los usen.
-* Pistola y dardos tranquilizantes (la sedación por carne ya existe y usará el mismo sistema), armas de hueso,
-  armaduras, trofeos y cráneos, construcciones (cercas, corrales, comederos, incubadoras).
-* Juvenil con proporciones propias (usa el modelo adulto a menor escala).
-* Barra de vida gráfica y pantalla de estadísticas (hoy: texto sobre la criatura), sonidos ambientales de bioma.
-* Variantes visuales de huevo por especie solo para 3 especies; dimorfismo adicional.
-* Optimización medida (nada medido todavía).
-
-## Errores conocidos / riesgos
-* **Primera compilación**: pueden aparecer errores en el código nuevo (los puntos con más riesgo: `DinoEggBlockEntity`,
-  `DinoEggBlock.getTicker`, `TheropodModel`, `HuntTargetGoal`). Envíame el error de Actions y lo arreglo.
-* El T. rex es enorme: puede atascarse en árboles o pasillos estrechos (pathfinding de vanilla).
-* Un T. rex sedado despierta furioso y ataca al jugador más cercano.
-* La tarea de comer cadáveres solo se activa si el depredador *salvaje* mata a la presa (las mascotas no capturan botín).
-* Si ves los ojos o dientes mal colocados, es la orientación de texturas; se ajusta en `tools/theropods.py`.
-* Los tiempos (gestación, incubación, crecimiento) son largos a propósito: se ajustan en `SpeciesData` de cada especie.
-
-## Siguiente versión propuesta (tú decides)
-* **v0.3** — Triceratops y Parasaurolophus (herbívoros defensivos, cargas, alertas), protección de crías,
-  cadáver visible, primeras monturas (T. rex y raptor) con habilidades.
-* **v0.4** — Pistola/dardos tranquilizantes, armas y armaduras con los recursos, trofeos; Carnotaurus y Spinosaurus.
+## Compatibilidad y prueba
+- Mantener Java 17, Minecraft 1.20.1 y Forge 47.3.0.
+- Instalar el JAR de v0.3.0 retirando el JAR anterior de la carpeta `mods`.
+- Probar en una copia del mundo: entrega del libro, navegación, aparición del Dilophosaurus, seguimiento tras domesticarlo,
+  cría y crecimiento, huevos, incubación, eclosión y persistencia tras salir y volver a entrar.

@@ -2,6 +2,7 @@ package com.prehistoricsurvival.registry;
 
 import com.prehistoricsurvival.PrehistoricSurvival;
 import com.prehistoricsurvival.block.DinoEggItem;
+import com.prehistoricsurvival.item.GuideBookItem;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -14,6 +15,10 @@ import net.minecraftforge.registries.RegistryObject;
 public final class ModItems {
     public static final DeferredRegister<Item> ITEMS =
             DeferredRegister.create(ForgeRegistries.ITEMS, PrehistoricSurvival.MOD_ID);
+
+    // ---- enciclopedia
+    public static final RegistryObject<Item> FIELD_GUIDE = ITEMS.register("field_guide",
+            () -> new GuideBookItem(new Item.Properties().rarity(Rarity.UNCOMMON)));
 
     // ---- carne
     public static final RegistryObject<Item> RAW_DINO_MEAT = ITEMS.register("raw_dino_meat",
@@ -50,6 +55,10 @@ public final class ModItems {
             () -> new DinoEggItem(ModBlocks.DINO_EGG.get(), new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON),
                     "prehistoricsurvival:tyrannosaurus", 18000));
 
+    public static final RegistryObject<Item> DILOPHOSAURUS_EGG = ITEMS.register("dilophosaurus_egg",
+            () -> new DinoEggItem(ModBlocks.DINO_EGG.get(), new Item.Properties().stacksTo(8).rarity(Rarity.UNCOMMON),
+                    "prehistoricsurvival:dilophosaurus", 15000));
+
     // ---- huevos generadores
     public static final RegistryObject<Item> DODO_SPAWN_EGG = ITEMS.register("dodo_spawn_egg",
             () -> new ForgeSpawnEggItem(ModEntities.DODO, 0x7d6a55, 0xd8c26a, new Item.Properties()));
@@ -58,10 +67,14 @@ public final class ModItems {
     public static final RegistryObject<Item> TYRANNOSAURUS_SPAWN_EGG = ITEMS.register("tyrannosaurus_spawn_egg",
             () -> new ForgeSpawnEggItem(ModEntities.TYRANNOSAURUS, 0x4b5a3a, 0x9a8a6a, new Item.Properties()));
 
+    public static final RegistryObject<Item> DILOPHOSAURUS_SPAWN_EGG = ITEMS.register("dilophosaurus_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntities.DILOPHOSAURUS, 0x66734a, 0xc4a75b, new Item.Properties()));
+
     /** Objeto huevo correspondiente a una especie (para conservar el huevo al recogerlo). */
     public static Item eggFor(String speciesId) {
         if (speciesId.endsWith("velociraptor")) return VELOCIRAPTOR_EGG.get();
         if (speciesId.endsWith("tyrannosaurus")) return TYRANNOSAURUS_EGG.get();
+        if (speciesId.endsWith("dilophosaurus")) return DILOPHOSAURUS_EGG.get();
         return DODO_EGG.get();
     }
 

@@ -33,6 +33,12 @@ public final class ModSounds {
     public static final RegistryObject<SoundEvent> REX_STEP = register("entity.tyrannosaurus.step");
     public static final RegistryObject<SoundEvent> REX_CHICK = register("entity.tyrannosaurus.chick");
 
+    public static final RegistryObject<SoundEvent> DILO_AMBIENT = register("entity.dilophosaurus.ambient");
+    public static final RegistryObject<SoundEvent> DILO_WARN = register("entity.dilophosaurus.warn");
+    public static final RegistryObject<SoundEvent> DILO_ATTACK = register("entity.dilophosaurus.attack");
+    public static final RegistryObject<SoundEvent> DILO_HURT = register("entity.dilophosaurus.hurt");
+    public static final RegistryObject<SoundEvent> DILO_DEATH = register("entity.dilophosaurus.death");
+
     private static RegistryObject<SoundEvent> register(String name) {
         return SOUNDS.register(name, () ->
                 SoundEvent.createVariableRangeEvent(new ResourceLocation(PrehistoricSurvival.MOD_ID, name)));

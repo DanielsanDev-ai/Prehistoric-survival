@@ -42,5 +42,14 @@
   "subtitles.prehistoricsurvival.entity.velociraptor.chick": "Una cría de Velociraptor pía",
   "subtitles.prehistoricsurvival.entity.velociraptor.death": "Velociraptor muere",
   "subtitles.prehistoricsurvival.entity.velociraptor.hurt": "Velociraptor chilla de dolor",
-  "subtitles.prehistoricsurvival.entity.velociraptor.warn": "Velociraptor advierte"
+  "subtitles.prehistoricsurvival.entity.velociraptor.warn": "Velociraptor advierte",
+  "entity.prehistoricsurvival.dilophosaurus": "Dilophosaurus",
+  "item.prehistoricsurvival.dilophosaurus_egg": "Huevo de Dilophosaurus",
+  "item.prehistoricsurvival.dilophosaurus_spawn_egg": "Huevo generador de Dilophosaurus",
+  "item.prehistoricsurvival.field_guide": "Enciclopedia de Prehistoric Survival",
+  "subtitles.prehistoricsurvival.entity.dilophosaurus.ambient": "Dilophosaurus emite un llamado",
+  "subtitles.prehistoricsurvival.entity.dilophosaurus.warn": "Dilophosaurus despliega su gola y advierte",
+  "subtitles.prehistoricsurvival.entity.dilophosaurus.attack": "Dilophosaurus ataca",
+  "subtitles.prehistoricsurvival.entity.dilophosaurus.hurt": "Dilophosaurus ruge de dolor",
+  "subtitles.prehistoricsurvival.entity.dilophosaurus.death": "Dilophosaurus muere"
 }

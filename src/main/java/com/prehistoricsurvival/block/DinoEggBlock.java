@@ -37,7 +37,7 @@ import javax.annotation.Nullable;
  */
 public class DinoEggBlock extends BaseEntityBlock {
     public static final IntegerProperty HATCH = IntegerProperty.create("hatch", 0, 2);
-    public static final IntegerProperty KIND = IntegerProperty.create("kind", 0, 2);
+    public static final IntegerProperty KIND = IntegerProperty.create("kind", 0, 3);
     private static final VoxelShape SHAPE = Block.box(3.0, 0.0, 3.0, 13.0, 13.0, 13.0);
 
     public DinoEggBlock(Properties properties) {
@@ -45,10 +45,11 @@ public class DinoEggBlock extends BaseEntityBlock {
         registerDefaultState(stateDefinition.any().setValue(HATCH, 0).setValue(KIND, 0));
     }
 
-    /** 0 = dodo, 1 = velociraptor, 2 = tyrannosaurus. */
+    /** 0 = dodo, 1 = velociraptor, 2 = tyrannosaurus, 3 = dilophosaurus. */
     public static int kindOf(String speciesId) {
         if (speciesId.endsWith("velociraptor")) return 1;
         if (speciesId.endsWith("tyrannosaurus")) return 2;
+        if (speciesId.endsWith("dilophosaurus")) return 3;
         return 0;
     }
 
