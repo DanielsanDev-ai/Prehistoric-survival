@@ -1,21 +1,25 @@
 # Changelog
 
-## 0.2.0
+## 0.3.0
 Nuevo
-- **Velociraptor** y **Tyrannosaurus rex** (modelo propio con cría distinta, 3 colores × macho/hembra + alfa,
-  animaciones de caminar, amenaza, mordisco, comer, dormir y poner huevo; sonidos propios).
-- **Reproducción completa**: apareamiento → gestación → puesta en un nido (o en el suelo) → huevo-bloque →
-  incubación según calor → eclosión. Genética (nivel, color, alfa, sexo) heredada de los padres.
-- **Nido** (craftable) y **huevo de dinosaurio** (bloque con 3 etapas de grietas y aspecto por especie;
-  se puede recoger y transportar conservando datos). Madres que vigilan su nido.
-- **Carnívoros**: caza solo con hambre, acecho→carga, caza en manada con flanqueo, huida al estar herido,
-  alimentarse del cadáver (animación, huesos y restos), advertencia territorial en 6 pasos,
-  investigación de ruidos (T. rex), alertas de manada.
-- **Un método de domesticación distinto por especie**: dodo (comida), velociraptor (sigilo), T. rex (sedación).
-- **Un recurso único por especie**: pluma de dodo, garra de raptor, diente de T. rex; los alfas sueltan Esencia alfa.
-- **Tamaños reales** por especie y por edad (un T. rex bebé mide ~20% de un adulto).
-- Carne sedante, huevos generadores nuevos, recetas, aparición por biomas, tablas de botín.
+- **Guía del Explorador**: libro-enciclopedia con portada, índice por secciones y 28 entradas (criaturas, vida y
+  crianza, domesticación, comportamiento, objetos, consejos, novedades). Vista previa 3D real de cada criatura que cicla
+  por etapas. Se entrega una vez al primer inicio de cada jugador. Contenido en JSON: las futuras versiones solo añaden archivos.
+- **Dilophosaurus**: dos crestas, gorguera que se despliega con animación, veneno que ralentiza y ciega (con recarga y
+  partículas), 3 etapas, huevo, nido de barro, domesticación por confianza y tiempo, glándula de veneno.
+- **Etapa de adolescente** con modelo y proporciones propias en las 4 especies; estadísticas que crecen de forma continua
+  con la edad; estirón con efectos al cambiar de etapa.
+- **Rediseño**: terópodos con cuello en S, cola de 3 segmentos, cejas, brazos con manos, plumas (raptor), texturas con
+  escamas, bandas y dientes; verificados con vistas previas.
+- **Alfas**: nombre "Alfa" dorado, piezas propias (púas, cuernos / cresta de plumas), brillo en la oscuridad, armadura y
+  resistencia al empuje, voz propia, Esencia alfa.
+- **Nidos**: 3 tipos con modelo y textura propios (paja, barro, montículo); cada especie prefiere uno.
+- **Huevos**: 4 aspectos de especie, hundidos en el nido, 3 fases de grietas, efectos de incubación (motas, copos, humo, crujidos).
+- **Cuidado parental**: crías que siguen a su madre, la defienden, la madre vigila el nido y ataca si se lo roban; nidos
+  salvajes con huevo (~30% de las hembras nuevas).
+- **Sonidos nuevos** (82): síntesis por formantes con rugosidad y reverberación; voz distinta por especie, etapa y alfa;
+  pasos propios, escupitajo y cascabeleo de gorguera.
 
 Cambios
-- Dodo: hitbox y modelo más pequeños (1 m real). Los datos guardados de v0.1.0 siguen siendo válidos.
-- Formato de guardado versión 2 (lee sin problema el de la versión 1).
+- Los huevos de v0.2.0 siguen siendo válidos. Formato de guardado compatible.
+- Textura del dodo ampliada (64x96) para su adolescente y cresta de alfa.

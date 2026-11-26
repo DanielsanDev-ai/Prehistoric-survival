@@ -4,3 +4,5 @@ run/
 *.iml
 .idea/
 .eclipse/
+build_previews/
+tools/__pycache__/

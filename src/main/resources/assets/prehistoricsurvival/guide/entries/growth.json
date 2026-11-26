@@ -1,0 +1,48 @@
+{
+  "id": "growth",
+  "section": "life",
+  "order": 1,
+  "since": "0.3.0",
+  "title": {
+    "es": "Etapas de crecimiento",
+    "en": "Growth stages"
+  },
+  "facts": [
+    {
+      "es": "Cría > adolescente"
+    },
+    {
+      "es": "> adulto"
+    },
+    {
+      "es": "Crecen con el tiempo"
+    }
+  ],
+  "text": [
+    {
+      "es": "Toda criatura pasa por tres etapas: CRÍA, ADOLESCENTE y ADULTO. Cada una tiene su propio modelo con proporciones distintas: la cría tiene la cabeza grande y las patas cortas; el adolescente es larguirucho, de cabeza y ojos grandes, hocico corto y cola corta; el adulto tiene las proporciones completas."
+    },
+    {
+      "es": "El crecimiento es progresivo: el tamaño y las estadísticas (vida, daño, velocidad) crecen poco a poco con la edad. Al cambiar de etapa se produce un 'estirón' con una nube de polvo."
+    },
+    {
+      "es": "Duración (cría + adolescente): dodo 10+20 min, velociraptor 10+15, dilophosaurus 10+15, T. rex 20+40."
+    },
+    {
+      "es": "Si pasa hambre (hambre por debajo del 20%), deja de crecer."
+    },
+    {
+      "es": "Comportamiento por edad: las crías siguen a quien puso su huevo, no cazan ni advierten; los adolescentes solo cazan presas pequeñas; solo los adultos se reproducen y el dilophosaurus solo escupe de adulto. Las voces de crías y adolescentes son más agudas."
+    }
+  ],
+  "preview": {
+    "entity": "prehistoricsurvival:tyrannosaurus",
+    "stage": "baby",
+    "alpha": false,
+    "stages": [
+      "baby",
+      "teen",
+      "adult"
+    ]
+  }
+}

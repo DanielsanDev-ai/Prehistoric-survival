@@ -1,0 +1,37 @@
+{
+  "id": "taming_rex",
+  "section": "taming",
+  "order": 4,
+  "since": "0.3.0",
+  "title": {
+    "es": "Domesticar un T. rex",
+    "en": "Taming a T. rex"
+  },
+  "facts": [
+    {
+      "es": "Carne sedante"
+    },
+    {
+      "es": "+ carne cocinada"
+    },
+    {
+      "es": "10 comidas (nivel 1)"
+    }
+  ],
+  "text": [
+    {
+      "es": "Método: SEDACIÓN. Un T. rex despierto no deja que lo alimentes. Primero dale CARNE SEDANTE: se duerme unos 45 segundos (como mucho 2 minutos acumulados)."
+    },
+    {
+      "es": "Mientras duerme, dale carne cocinada (carne de dino asada, ternera, cerdo, cordero o pollo cocinados) cada 3 segundos. Necesita 10 comidas a nivel 1: hará falta más de una carne sedante."
+    },
+    {
+      "es": "Si despierta antes de terminar, pierde parte de la confianza y ataca al jugador más cercano. ¡Prepárate!"
+    }
+  ],
+  "preview": {
+    "entity": "prehistoricsurvival:tyrannosaurus",
+    "stage": "adult",
+    "alpha": false
+  }
+}

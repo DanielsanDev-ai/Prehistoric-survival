@@ -16,6 +16,7 @@ public class DinoRenderer<T extends PrehistoricEntity, M extends EntityModel<T>>
     private final String[] variants;
     private final ResourceLocation[][] textures;
     private final ResourceLocation alphaTexture;
+    private final ResourceLocation glowTexture;
     private final float baseShadow;
 
     public DinoRenderer(EntityRendererProvider.Context context, M model, float shadow, String species, String[] variants) {
@@ -28,6 +29,8 @@ public class DinoRenderer<T extends PrehistoricEntity, M extends EntityModel<T>>
             textures[v][1] = tex(species, species + "_" + variants[v] + "_female");
         }
         this.alphaTexture = tex(species, species + "_alpha");
+        this.glowTexture = tex(species, species + "_alpha_glow");
+        addLayer(new GlowLayer<>(this, e -> glowTexture));
     }
 
     private static ResourceLocation tex(String species, String name) {

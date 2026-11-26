@@ -1,0 +1,41 @@
+{
+  "id": "news_030",
+  "section": "news",
+  "order": 1,
+  "since": "0.3.0",
+  "title": {
+    "es": "Novedades 0.3.0",
+    "en": "What's new in 0.3.0"
+  },
+  "facts": [
+    {
+      "es": "Dilophosaurus"
+    },
+    {
+      "es": "Libro-guía"
+    },
+    {
+      "es": "Adolescentes"
+    },
+    {
+      "es": "Nidos y alfas"
+    }
+  ],
+  "text": [
+    {
+      "es": "NUEVO: el Dilophosaurus, con gorguera, crestas y veneno que ralentiza y ciega."
+    },
+    {
+      "es": "NUEVO: Guía del Explorador (este libro), que se entrega al entrar por primera vez a un mundo."
+    },
+    {
+      "es": "NUEVO: modelos rediseñados con cuello en S, colas largas y plumas; etapa de adolescente con proporciones propias."
+    },
+    {
+      "es": "NUEVO: alfas con púas, cuernos y brillo propio; sonidos nuevos más naturales y distintos para cada etapa."
+    },
+    {
+      "es": "NUEVO: nidos de barro y montículos, huevos de cuatro especies, nidos salvajes, cuidado parental e incubación con efectos."
+    }
+  ]
+}

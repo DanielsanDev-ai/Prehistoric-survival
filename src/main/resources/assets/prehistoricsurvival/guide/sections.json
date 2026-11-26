@@ -1,0 +1,68 @@
+{
+  "sections": [
+    {
+      "id": "intro",
+      "order": 1,
+      "title": {
+        "es": "Bienvenida",
+        "en": "Welcome"
+      }
+    },
+    {
+      "id": "creatures",
+      "order": 2,
+      "title": {
+        "es": "Criaturas",
+        "en": "Creatures"
+      }
+    },
+    {
+      "id": "life",
+      "order": 3,
+      "title": {
+        "es": "Vida y crianza",
+        "en": "Life and nurturing"
+      }
+    },
+    {
+      "id": "taming",
+      "order": 4,
+      "title": {
+        "es": "Domesticación",
+        "en": "Taming"
+      }
+    },
+    {
+      "id": "behavior",
+      "order": 5,
+      "title": {
+        "es": "Comportamiento",
+        "en": "Behavior"
+      }
+    },
+    {
+      "id": "items",
+      "order": 6,
+      "title": {
+        "es": "Objetos y recursos",
+        "en": "Items and resources"
+      }
+    },
+    {
+      "id": "tips",
+      "order": 7,
+      "title": {
+        "es": "Consejos",
+        "en": "Tips"
+      }
+    },
+    {
+      "id": "news",
+      "order": 8,
+      "title": {
+        "es": "Novedades",
+        "en": "What's new"
+      }
+    }
+  ]
+}

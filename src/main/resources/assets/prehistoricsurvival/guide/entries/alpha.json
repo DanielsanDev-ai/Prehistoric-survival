@@ -1,0 +1,46 @@
+{
+  "id": "alpha",
+  "section": "life",
+  "order": 2,
+  "since": "0.3.0",
+  "title": {
+    "es": "Criaturas Alfa",
+    "en": "Alpha creatures"
+  },
+  "facts": [
+    {
+      "es": "Nivel 30-40"
+    },
+    {
+      "es": "Brillan de noche"
+    },
+    {
+      "es": "Sueltan Esencia alfa"
+    }
+  ],
+  "text": [
+    {
+      "es": "Los Alfa son ejemplares excepcionales: raros (1 de cada 60 dodos, 1 de cada 40 raptores, 1 de cada 45 T. rex y dilophosaurus). Su nombre muestra el prefijo Alfa en dorado y negrita."
+    },
+    {
+      "es": "Aspecto: más grandes, con pieles oscuras de colores intensos, púas de hueso en el lomo, cuernos sobre los ojos (el dodo, una cresta de plumas) y ojos, rayas y gorguera que BRILLAN en la oscuridad."
+    },
+    {
+      "es": "Estadísticas: nivel 30-40, el doble de vida y daño (x1,8 el T. rex), piel gruesa (armadura 4) y gran resistencia al empuje."
+    },
+    {
+      "es": "Voz: más grave, larga y potente, con eco. Los dodo alfa guían a su bandada."
+    },
+    {
+      "es": "Recompensa: siempre sueltan Esencia alfa. El veneno del dilophosaurus alfa es más potente y se recarga antes. Son más difíciles de domesticar (el doble de comidas)."
+    },
+    {
+      "es": "Los huevos tienen una pequeña probabilidad de dar un alfa, mucho mayor si un progenitor lo es."
+    }
+  ],
+  "preview": {
+    "entity": "prehistoricsurvival:tyrannosaurus",
+    "stage": "adult",
+    "alpha": true
+  }
+}

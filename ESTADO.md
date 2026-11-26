@@ -1,61 +1,57 @@
-# Estado del proyecto — v0.2.0
+# Estado del proyecto — v0.3.0
 
-Última actualización: 23-nov-2026.
+Última actualización: 24-nov-2026.
 
-## Qué está verificado y qué no
-* **v0.1.0**: compilada y probada por el director creativo en Minecraft (dodo bebé/adulto/domesticación OK).
-* **v0.2.0 — comprobado en mi entorno (real)**: 48 JSON válidos; las 38 texturas y 38 sonidos `.ogg` existen y
-  se inspeccionaron/decodificaron; cada modelo, textura, sonido y clave de idioma referenciados existe;
-  todos los `import` internos resuelven; llaves y paréntesis equilibrados en los 43 archivos Java.
-* **v0.2.0 — NO comprobado**: que **compile** (sin Forge ni `javac` aquí), que las animaciones/modelos se vean
-  bien en el juego, el equilibrio y el rendimiento. Todo lo de abajo está *escrito*, no *probado*.
+## Verificación (lo que SÍ y lo que NO)
+* **v0.1.0 y v0.2.0**: compiladas por el director creativo en GitHub Actions; la v0.1.0 además probada en juego.
+* **v0.3.0 — comprobado aquí (real)**
+  * Sintaxis de los **53 archivos Java** validada con el compilador de Java (sin errores de sintaxis).
+  * `tools/check_project.py` sin errores: 111 JSON válidos, 62 texturas, 82 sonidos, estados de bloque completos
+    (3 etapas × 4 especies × con/sin nido), todos los modelos/texturas/sonidos/idiomas referenciados existen,
+    ModSounds/ModItems/ModEntities/ModBlocks usados existen, imports internos resuelven, entradas del libro válidas.
+  * Sonidos: medidos (sin silencios ni recortes, firmas espectrales distintas por especie).
+  * Modelos de terópodos: vistas previas propias (lateral y frontal) para verificar proporciones, ángulos y gorguera.
+  * Toda la API de Minecraft/Forge que es NUEVA respecto a la v0.2.0 compilada se revisó a mano.
+* **v0.3.0 — NO comprobado**
+  * **Que compile**: no tengo los jars de Minecraft/Forge, así que no se puede comprobar tipos contra la API.
+    **No puedo confirmarte que compile**; lo confirma GitHub Actions. Punto de mayor incertidumbre:
+    `InventoryScreen.renderEntityInInventoryFollowsMouse` en `GuideScreen.java` (vista previa 3D del libro).
+    Si falla, es una sola línea y la corrijo.
+  * Cómo se ven y se oyen en el juego: modelos, animaciones, brillo de alfas, libro y sonidos (son síntesis; no he
+    podido escucharlos, solo medirlos). El equilibrio y el rendimiento.
 
-## Implementado en la v0.2.0 (código y recursos existentes)
-**Especies**: Dodo (v0.1) · **Velociraptor** · **Tyrannosaurus rex**.
+## Implementado
+**Libro-guía**: portada y páginas con arte propio, índice por secciones, 28 entradas, paginación automática, vista previa
+3D con ciclo de etapas, marca NUEVO, entrega única al primer inicio, receta (libro + cuero). Ampliable con JSON.
+**Criaturas (4)**: dodo, velociraptor, T. rex, dilophosaurus, cada una con 3 etapas (modelos propios), alfa, dimorfismo,
+3 colores × macho/hembra, sonidos propios, método de domesticación y recurso único:
 
-| | Dodo | Velociraptor | T. rex |
-|---|---|---|---|
-| Hitbox adulto | 0,5 × 1,0 | 0,6 × 0,9 | 2,2 × 4,4 |
-| Tamaño (modelo) | ~1 m | cadera ~0,5 m, ~1,7 m largo | cadera ~2,9 m, cabeza ~4,9 m, ~9 m largo |
-| Vida / daño | 12 / 1 | 28 / 5 | 160 / 22 |
-| Dieta | herbívoro | carnívoro (presas pequeñas) | carnívoro (presas grandes) |
-| Sociedad | bandada con alfa | manada, caza coordinada | solitario, territorial (18 bloques) |
-| Domesticación | **comida** (semillas) | **sigilo** (carne cruda agachado) | **sedación** (carne sedante + carne cocinada) |
-| Recurso único | pluma | garra de raptor | diente de T. rex |
-| Incubación / gestación | 9.000 / 3.000 ticks | 12.000 / 5.000 | 18.000 / 8.000 |
-| Etapas (bebé+juvenil) | 10 + 20 min | 10 + 15 min | 20 + 40 min |
+| | Dodo | Velociraptor | T. rex | Dilophosaurus |
+|---|---|---|---|---|
+| Tamaño real | ~1 m | cadera ~0,5 m | cadera ~3 m | cadera ~1 m |
+| Domesticación | comida | sigilo | sedación | confianza y tiempo |
+| Recurso | pluma | garra | diente | glándula de veneno |
+| Nido preferido | paja | barro | montículo | barro |
+| Habilidad | planea | caza en manada | rugido, territorio | veneno (ralentiza+ciega) |
 
-**Sistemas nuevos**
-* Reproducción, huevos (bloque + objeto), nidos, incubación por calor, eclosión con genética, madre que vigila el nido.
-* IA de depredadores: caza con hambre, acecho y carga, flanqueo en manada, huida herido, comer cadáver, advertencia
-  territorial, investigar ruidos, dormir de noche (se despiertan si te acercas), sedación.
-* Los alfas sueltan Esencia alfa; los depredadores salvajes retienen el botín de sus presas y lo sueltan al comer.
-* Los herbívoros (dodo) huyen de velociraptor y T. rex; los raptores huyen del T. rex.
+**Sistemas**: crecimiento continuo y etapas, alfas (armadura, resistencia, brillo, voz, esencia), nidos (3), huevos (4 + 3
+fases), incubación con calor/nido/efectos, eclosión con genética, cuidado parental, nidos salvajes, caza y territorio.
 
-## Pendiente (NO existe todavía)
-* Otras 10 especies: Dilophosaurus, Brachiosaurus, Parasaurolophus, Triceratops, Carnotaurus, Spinosaurus,
-  Compsognathus, Pachycephalosaurus, Titanoboa (+ el resto de la lista inicial).
-* Monturas, sillas, habilidades (clic derecho / R), órdenes avanzadas (defender zona…).
-* **Cadáver visible**: hoy la presa desaparece al morir y el depredador come en ese punto (animación sí; cuerpo no).
-* Padres que cazan y llevan comida a las crías; crías que siguen a sus padres concretos (hoy siguen a adultos de su especie).
-* Utilidad de los recursos (garra, diente, esencia): aún no hay armas, armaduras ni crafteos que los usen.
-* Pistola y dardos tranquilizantes (la sedación por carne ya existe y usará el mismo sistema), armas de hueso,
-  armaduras, trofeos y cráneos, construcciones (cercas, corrales, comederos, incubadoras).
-* Juvenil con proporciones propias (usa el modelo adulto a menor escala).
-* Barra de vida gráfica y pantalla de estadísticas (hoy: texto sobre la criatura), sonidos ambientales de bioma.
-* Variantes visuales de huevo por especie solo para 3 especies; dimorfismo adicional.
-* Optimización medida (nada medido todavía).
+## Pendiente / límites (sin disimular)
+* **Rediseño**: es una mejora real de los terópodos (más piezas, escamas, plumas, S-curve), pero sigue siendo estilo bloque
+  de Minecraft. **El dodo no se rediseñó** (solo se le añadió adolescente y cresta de alfa).
+* **Cambio de etapa**: el tamaño crece de forma continua, pero el modelo cambia de golpe al cambiar de etapa (cría →
+  adolescente → adulto); se disimula con una nube de polvo. No hay transición intermedia entre modelos.
+* **Sonidos**: mejor técnica (formantes, rugosidad, reverb) pero siguen siendo síntesis, no grabaciones; puede que alguno
+  siga sonando artificial. Si quieres sonidos más reales hace falta aportar grabaciones con licencia.
+* **Libro**: los textos están en español; en inglés solo hay títulos (el resto cae al español).
+* **Efectos de incubación**: partículas y sonidos; el huevo no "tiembla" (requeriría un renderizador de bloque propio).
+* **Nidos salvajes**: se crean al aparecer una hembra nueva (30%), no son estructuras de generación de mundo.
+* **Padres**: siguen, defienden y vigilan el nido; todavía no cazan ni traen comida a las crías.
+* **Dilophosaurus**: el domesticado escupe contra los objetivos de su dueño, pero aún no hay montura ni control manual de la habilidad.
+* Sigue pendiente de versiones anteriores: 8 especies más, monturas y habilidades, cadáver visible, utilidad de los
+  recursos (armas/armaduras), pistola y dardos, trofeos, construcciones, barra de vida gráfica.
 
-## Errores conocidos / riesgos
-* **Primera compilación**: pueden aparecer errores en el código nuevo (los puntos con más riesgo: `DinoEggBlockEntity`,
-  `DinoEggBlock.getTicker`, `TheropodModel`, `HuntTargetGoal`). Envíame el error de Actions y lo arreglo.
-* El T. rex es enorme: puede atascarse en árboles o pasillos estrechos (pathfinding de vanilla).
-* Un T. rex sedado despierta furioso y ataca al jugador más cercano.
-* La tarea de comer cadáveres solo se activa si el depredador *salvaje* mata a la presa (las mascotas no capturan botín).
-* Si ves los ojos o dientes mal colocados, es la orientación de texturas; se ajusta en `tools/theropods.py`.
-* Los tiempos (gestación, incubación, crecimiento) son largos a propósito: se ajustan en `SpeciesData` de cada especie.
-
-## Siguiente versión propuesta (tú decides)
-* **v0.3** — Triceratops y Parasaurolophus (herbívoros defensivos, cargas, alertas), protección de crías,
-  cadáver visible, primeras monturas (T. rex y raptor) con habilidades.
-* **v0.4** — Pistola/dardos tranquilizantes, armas y armaduras con los recursos, trofeos; Carnotaurus y Spinosaurus.
+## Mantenimiento del libro
+Cuando cambie un valor del juego (`SpeciesData`, recetas, tiempos), actualiza la entrada de `tools/guide_content.py` que lo
+menciona y vuelve a ejecutar `python3 tools/generate_assets.py`.

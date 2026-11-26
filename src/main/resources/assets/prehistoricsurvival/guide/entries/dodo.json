@@ -1,0 +1,55 @@
+{
+  "id": "dodo",
+  "section": "creatures",
+  "order": 1,
+  "since": "0.3.0",
+  "title": {
+    "es": "Dodo",
+    "en": "Dodo"
+  },
+  "facts": [
+    {
+      "es": "Dieta: herbívoro"
+    },
+    {
+      "es": "Tamaño: ~1 m"
+    },
+    {
+      "es": "Vida: 12"
+    },
+    {
+      "es": "Tame: semillas"
+    },
+    {
+      "es": "Drop: pluma"
+    }
+  ],
+  "text": [
+    {
+      "es": "Ave pequeña, gregaria y pacífica que vive en bandadas guiadas por un individuo alfa. Pasta césped cuando tiene hambre (el bloque se convierte en tierra) y duerme de noche."
+    },
+    {
+      "es": "No se defiende: huye de depredadores (lobos, zorros, raptores, dilophosaurus y T. rex) y, si atacan a uno, toda la bandada cercana se alarma y escapa graznando."
+    },
+    {
+      "es": "Dónde encontrarlo: junglas, llanuras, bosques y sabanas, en grupos de 3 a 6. Si cae de altura, aletea y planea sin hacerse daño."
+    },
+    {
+      "es": "Cómo domesticarlo: dale semillas o bayas dulces varias veces. Cada comida aumenta su confianza; con 4 comidas (más con el nivel) será tuyo."
+    },
+    {
+      "es": "Sus hembras ponen huevos en nidos de paja. Al morir suelta carne y plumas."
+    }
+  ],
+  "preview": {
+    "entity": "prehistoricsurvival:dodo",
+    "stage": "baby",
+    "alpha": false,
+    "stages": [
+      "baby",
+      "teen",
+      "adult",
+      "alpha"
+    ]
+  }
+}

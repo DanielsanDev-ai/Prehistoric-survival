@@ -1,0 +1,38 @@
+{
+  "id": "taming",
+  "section": "taming",
+  "order": 1,
+  "since": "0.3.0",
+  "title": {
+    "es": "Domesticar: lo básico",
+    "en": "Taming basics"
+  },
+  "facts": [
+    {
+      "es": "Dodo: comida"
+    },
+    {
+      "es": "Raptor: sigilo"
+    },
+    {
+      "es": "Dilo: confianza"
+    },
+    {
+      "es": "T. rex: sedación"
+    }
+  ],
+  "text": [
+    {
+      "es": "Todas las criaturas se pueden domesticar, pero cada especie con un método distinto. Nunca es instantáneo: ves el porcentaje sobre su cabeza ('Domesticando %')."
+    },
+    {
+      "es": "Las comidas necesarias suben con el nivel de la criatura (+1 cada 10 niveles) y se duplican en los alfas."
+    },
+    {
+      "es": "No lo ataques: cada golpe te quita confianza (-20%), y la confianza se pierde sola si lo dejas."
+    },
+    {
+      "es": "Una vez domesticada: te sigue, defiende al dueño, se sienta o se levanta con clic derecho con la mano vacía, y se alimenta y cura con su comida. Sus crías nacen domesticadas."
+    }
+  ]
+}

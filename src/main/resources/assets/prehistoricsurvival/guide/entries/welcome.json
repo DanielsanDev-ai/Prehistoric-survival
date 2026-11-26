@@ -1,0 +1,32 @@
+{
+  "id": "welcome",
+  "section": "intro",
+  "order": 1,
+  "since": "0.3.0",
+  "title": {
+    "es": "Bienvenido, explorador",
+    "en": "Welcome, explorer"
+  },
+  "facts": [
+    {
+      "es": "Versión: 0.3.0"
+    },
+    {
+      "es": "Criaturas: 4"
+    },
+    {
+      "es": "Secciones: 8"
+    }
+  ],
+  "text": [
+    {
+      "es": "Este libro es la enciclopedia de Prehistoric Survival. Reúne todo lo que se sabe de las criaturas prehistóricas que habitan el mundo y de cómo sobrevivir entre ellas."
+    },
+    {
+      "es": "Vuelve al Índice con el botón de abajo a la izquierda y elige una sección. Con las flechas < > (o las teclas del teclado) pasas las páginas de cada entrada."
+    },
+    {
+      "es": "El libro crece con el mod: cada versión añade páginas nuevas, marcadas con NUEVO mientras estés en esa versión. Si lo pierdes, se fabrica con un libro y un cuero."
+    }
+  ]
+}

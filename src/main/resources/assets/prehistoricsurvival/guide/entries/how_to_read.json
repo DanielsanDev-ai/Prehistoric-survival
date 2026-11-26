@@ -1,0 +1,22 @@
+{
+  "id": "how_to_read",
+  "section": "intro",
+  "order": 2,
+  "since": "0.3.0",
+  "title": {
+    "es": "Cómo usar este libro",
+    "en": "How to use this book"
+  },
+  "facts": [],
+  "text": [
+    {
+      "es": "Cada criatura tiene una ficha con su modelo 3D real: se mueve con tu ratón. Las que muestran varias etapas van cambiando solas: cría, adolescente, adulto y alfa."
+    },
+    {
+      "es": "Las secciones de Vida, Domesticación y Comportamiento explican las mecánicas comunes; las fichas de Criaturas explican lo propio de cada especie."
+    },
+    {
+      "es": "Los tiempos se dan en minutos de juego reales (20 ticks = 1 segundo)."
+    }
+  ]
+}

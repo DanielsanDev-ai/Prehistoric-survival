@@ -2,7 +2,7 @@ package com.prehistoricsurvival.entity;
 
 /** Accion visible de la criatura. Se sincroniza con el cliente para animar el modelo. */
 public enum EntityAction {
-    NONE, EATING, SLEEPING, LAYING, THREAT;
+    NONE, EATING, SLEEPING, LAYING, THREAT, SPITTING;
 
     public static EntityAction byId(int id) {
         EntityAction[] all = values();

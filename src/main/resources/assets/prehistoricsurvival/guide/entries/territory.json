@@ -1,0 +1,32 @@
+{
+  "id": "territory",
+  "section": "behavior",
+  "order": 1,
+  "since": "0.3.0",
+  "title": {
+    "es": "Territorio y advertencias",
+    "en": "Territory and warnings"
+  },
+  "facts": [
+    {
+      "es": "Raptor: 9 bloques"
+    },
+    {
+      "es": "Dilo: 12 bloques"
+    },
+    {
+      "es": "T. rex: 18 bloques"
+    }
+  ],
+  "text": [
+    {
+      "es": "Los depredadores salvajes defienden su territorio con un aviso en pasos: 1) detectan al intruso, 2) se giran hacia él, 3) emiten un sonido de advertencia, 4) adoptan una postura amenazante, 5) si te alejas, se calman, 6) si te acercas demasiado o insistes, atacan."
+    },
+    {
+      "es": "Distancia de aviso: velociraptor 9 bloques, dilophosaurus 12, T. rex 18. Con un nido cerca aumenta un 40%. Si duermen, reaccionan solo a la mitad de esa distancia."
+    },
+    {
+      "es": "No te atacan en creativo y nunca atacan a sus dueños."
+    }
+  ]
+}

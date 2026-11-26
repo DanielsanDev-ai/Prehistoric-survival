@@ -1,31 +1,76 @@
 {
   "variants": {
-    "hatch=0,kind=0": {
-      "model": "prehistoricsurvival:block/dino_egg_0_0"
+    "hatch=0,kind=0,nested=false": {
+      "model": "prehistoricsurvival:block/dino_egg_0_0_ground"
     },
-    "hatch=1,kind=0": {
-      "model": "prehistoricsurvival:block/dino_egg_0_1"
+    "hatch=0,kind=0,nested=true": {
+      "model": "prehistoricsurvival:block/dino_egg_0_0_nested"
     },
-    "hatch=2,kind=0": {
-      "model": "prehistoricsurvival:block/dino_egg_0_2"
+    "hatch=1,kind=0,nested=false": {
+      "model": "prehistoricsurvival:block/dino_egg_0_1_ground"
     },
-    "hatch=0,kind=1": {
-      "model": "prehistoricsurvival:block/dino_egg_1_0"
+    "hatch=1,kind=0,nested=true": {
+      "model": "prehistoricsurvival:block/dino_egg_0_1_nested"
     },
-    "hatch=1,kind=1": {
-      "model": "prehistoricsurvival:block/dino_egg_1_1"
+    "hatch=2,kind=0,nested=false": {
+      "model": "prehistoricsurvival:block/dino_egg_0_2_ground"
     },
-    "hatch=2,kind=1": {
-      "model": "prehistoricsurvival:block/dino_egg_1_2"
+    "hatch=2,kind=0,nested=true": {
+      "model": "prehistoricsurvival:block/dino_egg_0_2_nested"
     },
-    "hatch=0,kind=2": {
-      "model": "prehistoricsurvival:block/dino_egg_2_0"
+    "hatch=0,kind=1,nested=false": {
+      "model": "prehistoricsurvival:block/dino_egg_1_0_ground"
     },
-    "hatch=1,kind=2": {
-      "model": "prehistoricsurvival:block/dino_egg_2_1"
+    "hatch=0,kind=1,nested=true": {
+      "model": "prehistoricsurvival:block/dino_egg_1_0_nested"
     },
-    "hatch=2,kind=2": {
-      "model": "prehistoricsurvival:block/dino_egg_2_2"
+    "hatch=1,kind=1,nested=false": {
+      "model": "prehistoricsurvival:block/dino_egg_1_1_ground"
+    },
+    "hatch=1,kind=1,nested=true": {
+      "model": "prehistoricsurvival:block/dino_egg_1_1_nested"
+    },
+    "hatch=2,kind=1,nested=false": {
+      "model": "prehistoricsurvival:block/dino_egg_1_2_ground"
+    },
+    "hatch=2,kind=1,nested=true": {
+      "model": "prehistoricsurvival:block/dino_egg_1_2_nested"
+    },
+    "hatch=0,kind=2,nested=false": {
+      "model": "prehistoricsurvival:block/dino_egg_2_0_ground"
+    },
+    "hatch=0,kind=2,nested=true": {
+      "model": "prehistoricsurvival:block/dino_egg_2_0_nested"
+    },
+    "hatch=1,kind=2,nested=false": {
+      "model": "prehistoricsurvival:block/dino_egg_2_1_ground"
+    },
+    "hatch=1,kind=2,nested=true": {
+      "model": "prehistoricsurvival:block/dino_egg_2_1_nested"
+    },
+    "hatch=2,kind=2,nested=false": {
+      "model": "prehistoricsurvival:block/dino_egg_2_2_ground"
+    },
+    "hatch=2,kind=2,nested=true": {
+      "model": "prehistoricsurvival:block/dino_egg_2_2_nested"
+    },
+    "hatch=0,kind=3,nested=false": {
+      "model": "prehistoricsurvival:block/dino_egg_3_0_ground"
+    },
+    "hatch=0,kind=3,nested=true": {
+      "model": "prehistoricsurvival:block/dino_egg_3_0_nested"
+    },
+    "hatch=1,kind=3,nested=false": {
+      "model": "prehistoricsurvival:block/dino_egg_3_1_ground"
+    },
+    "hatch=1,kind=3,nested=true": {
+      "model": "prehistoricsurvival:block/dino_egg_3_1_nested"
+    },
+    "hatch=2,kind=3,nested=false": {
+      "model": "prehistoricsurvival:block/dino_egg_3_2_ground"
+    },
+    "hatch=2,kind=3,nested=true": {
+      "model": "prehistoricsurvival:block/dino_egg_3_2_nested"
     }
   }
 }

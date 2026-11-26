@@ -1,0 +1,34 @@
+{
+  "id": "taming_raptor",
+  "section": "taming",
+  "order": 3,
+  "since": "0.3.0",
+  "title": {
+    "es": "Domesticar un velociraptor",
+    "en": "Taming a velociraptor"
+  },
+  "facts": [
+    {
+      "es": "Shift + carne cruda"
+    },
+    {
+      "es": "8 comidas (nivel 1)"
+    }
+  ],
+  "text": [
+    {
+      "es": "Método: SIGILO. Agáchate (Shift) con carne cruda en la mano (carne de dino, ternera, cerdo, cordero, pollo o conejo crudos) y úsala con clic derecho."
+    },
+    {
+      "es": "Si no estás agachado, desconfía: avisa con un sonido y pierde 5% de confianza. Necesita 8 comidas a nivel 1."
+    },
+    {
+      "es": "Aléjate de su manada si se pone agresiva: cuando uno ataca, avisa a los demás."
+    }
+  ],
+  "preview": {
+    "entity": "prehistoricsurvival:velociraptor",
+    "stage": "adult",
+    "alpha": false
+  }
+}

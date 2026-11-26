@@ -17,7 +17,8 @@ public class HuntTargetGoal extends NearestAttackableTargetGoal<LivingEntity> {
 
     public HuntTargetGoal(PrehistoricEntity hunter, TagKey<EntityType<?>> preyTag) {
         super(hunter, LivingEntity.class, 10, true, false,
-                e -> e.getType().is(preyTag) && !(e instanceof TamableAnimal pet && pet.isTame()));
+                e -> e.getType().is(preyTag) && !(e instanceof TamableAnimal pet && pet.isTame())
+                        && (hunter.isAdult() || e.getMaxHealth() <= 12.0f));   // los jovenes solo cazan presas pequenas
         this.hunter = hunter;
     }
 

@@ -97,7 +97,7 @@ def palette(variant, female, alpha):
 def paint_dodo(variant, female, alpha, seed):
     rng = random.Random(seed)
     p = palette(variant, female, alpha)
-    img = Image.new("RGBA", (64, 64), (0, 0, 0, 0))
+    img = Image.new("RGBA", (64, 96), (0, 0, 0, 0))
 
     # ---- ADULTO (mismos valores que DodoModel: texOffs y tamanos de caja)
     box(img, rng, 0, 0, 8, 8, 10, top=shade(p["body"], 1.05), side=p["body"], bottom=p["belly"],
@@ -137,7 +137,39 @@ def paint_dodo(variant, female, alpha, seed):
     box(img, rng, 36, 8, 1, 3, 4, top=fluff, side=fluff, bottom=fluff, noise=12)
     for (x, y) in ((36, 60), (37, 60), (48, 60), (49, 60)):
         px[x, y] = p["eye"] + (255,)
+
+    # ---- ADOLESCENTE (region y >= 64; coincide con DodoModel: grupo "teen")
+    tb = mix(p["body"], down, 0.2)
+    tbelly = mix(p["belly"], down, 0.3)
+    box(img, rng, 0, 64, 7, 7, 9, top=shade(tb, 1.05), side=tb, bottom=tbelly, front=tbelly, back=shade(tb, 0.9))   # cuerpo
+    streaks(img, rng, 0, 73, 9, 7, shade(tb, 0.75), 8)
+    streaks(img, rng, 16, 73, 9, 7, shade(tb, 0.75), 8)
+    box(img, rng, 32, 64, 3, 6, 3, top=p["head"], side=shade(p["head"], 0.95), bottom=shade(p["head"], 0.8))        # cuello
+    box(img, rng, 44, 64, 5, 5, 5, top=shade(p["head"], 1.1), side=p["head"], bottom=shade(p["head"], 0.85))       # cabeza
+    box(img, rng, 0, 80, 3, 3, 4, top=p["beak"], side=p["beak"], bottom=shade(p["beak"], 0.8),
+        front=p["beak_tip"], back=p["beak"], noise=5)                                                             # pico
+    box(img, rng, 14, 80, 2, 7, 2, top=p["leg"], side=p["leg"], bottom=shade(p["leg"], 0.7), noise=5)             # patas
+    box(img, rng, 22, 80, 2, 7, 2, top=p["leg"], side=p["leg"], bottom=shade(p["leg"], 0.7), noise=5)
+    box(img, rng, 30, 80, 1, 4, 5, top=shade(tb, 0.85), side=shade(tb, 0.85), bottom=shade(tb, 0.85))             # alas
+    box(img, rng, 42, 80, 1, 4, 5, top=shade(tb, 0.85), side=shade(tb, 0.85), bottom=shade(tb, 0.85))
+    box(img, rng, 0, 89, 5, 3, 2, top=p["tail"], side=p["tail"], bottom=shade(p["tail"], 0.85))                    # cola
+    # cresta de plumas (solo la muestran los alfas): adulto y adolescente comparten esta region
+    box(img, rng, 50, 89, 3, 3, 2, top=p["accent"], side=shade(p["accent"], 0.9), bottom=shade(p["accent"], 0.7), noise=6)
+    for (x, y) in ((46, 70), (56, 70)):
+        px[x, y] = p["eye"] + (255,)
     return img
+
+
+def dodo_glow(accent=(214, 168, 40), eye=(220, 40, 30)):
+    """Brillo del dodo alfa: ojos (adulto, cria y adolescente) y plumas de la cresta."""
+    glow = Image.new("RGBA", (64, 96), (0, 0, 0, 0))
+    gp = glow.load()
+    for (x, y) in ((2, 34), (12, 34), (36, 60), (37, 60), (48, 60), (49, 60), (46, 70), (56, 70)):
+        gp[x, y] = eye + (255,)
+    for x in range(52, 55):
+        for y in range(91, 94):
+            gp[x, y] = accent + (255,)
+    return glow
 
 
 # --------------------------------------------------------------------------- iconos de objetos (16x16)
@@ -246,18 +278,31 @@ def make_sounds():
 
 
 def main():
+    """Genera TODOS los recursos del mod. Cada modulo es independiente y se puede ejecutar por separado."""
+    import shutil
+    snd = os.path.join(ASSETS, "sounds")
+    if os.path.isdir(snd):
+        shutil.rmtree(snd)          # evita sonidos antiguos huerfanos
+    os.makedirs(SND_DODO, exist_ok=True)
+
     for variant in BASE:
         for female in (False, True):
             name = f"dodo_{variant}_{'female' if female else 'male'}.png"
             paint_dodo(variant, female, False, zlib.crc32(f'{variant}{female}'.encode())).save(os.path.join(TEX_DODO, name))
     paint_dodo("brown", False, True, 4242).save(os.path.join(TEX_DODO, "dodo_alpha.png"))
-    icon_meat(False).save(os.path.join(TEX_ITEM, "raw_dino_meat.png"))
-    icon_meat(True).save(os.path.join(TEX_ITEM, "cooked_dino_meat.png"))
-    icon_feather().save(os.path.join(TEX_ITEM, "dodo_feather.png"))
-    make_sounds()
+    dodo_glow().save(os.path.join(TEX_DODO, "dodo_alpha_glow.png"))
+
     import theropods
     theropods.run()
-    print("Texturas, modelos y sonidos generados en", ASSETS)
+    import blocks_items
+    blocks_items.run()
+    import voices
+    voices.run()
+    import guide_content
+    guide_content.run()
+    import data_gen
+    data_gen.run()
+    print("Recursos generados en", ASSETS)
 
 
 if __name__ == "__main__":

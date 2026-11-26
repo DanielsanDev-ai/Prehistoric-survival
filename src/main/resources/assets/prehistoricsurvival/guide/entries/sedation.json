@@ -1,0 +1,29 @@
+{
+  "id": "sedation",
+  "section": "taming",
+  "order": 6,
+  "since": "0.3.0",
+  "title": {
+    "es": "Sedación y carne sedante",
+    "en": "Sedation and sedative meat"
+  },
+  "facts": [
+    {
+      "es": "45 s por carne"
+    },
+    {
+      "es": "Máximo 2 min"
+    }
+  ],
+  "text": [
+    {
+      "es": "CARNE SEDANTE: carne de dinosaurio cruda + ojo de araña fermentado + bayas dulces (receta sin forma)."
+    },
+    {
+      "es": "Al dársela a una criatura que se puede sedar (como el T. rex) se duerme: no se mueve, no mira y no ataca. Dura 45 s por carne, hasta 2 minutos. Si la golpean, no se despierta pero sufre daño."
+    },
+    {
+      "es": "Un salvaje que despierta pierde parte de la confianza ganada."
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "id": "controls",
+  "section": "tips",
+  "order": 2,
+  "since": "0.3.0",
+  "title": {
+    "es": "Controles",
+    "en": "Controls"
+  },
+  "facts": [],
+  "text": [
+    {
+      "es": "Clic derecho con comida: alimentar o domesticar. Clic derecho con la mano vacía en una criatura domesticada: sentarla o levantarla."
+    },
+    {
+      "es": "Shift: agacharse (necesario para domesticar al velociraptor)."
+    },
+    {
+      "es": "Sobre la criatura verás su nombre, nivel, vida y el progreso de domesticación, hasta 16 bloques (32 si la miras)."
+    }
+  ]
+}

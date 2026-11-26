@@ -1,0 +1,28 @@
+{
+  "id": "tips",
+  "section": "tips",
+  "order": 1,
+  "since": "0.3.0",
+  "title": {
+    "es": "Consejos de supervivencia",
+    "en": "Survival tips"
+  },
+  "facts": [],
+  "text": [
+    {
+      "es": "Observa antes de acercarte: la postura de la criatura te dice su humor. Una cabeza baja y la boca abierta es una amenaza."
+    },
+    {
+      "es": "Los nidos salvajes siempre están vigilados. Atrae a la madre y roba el huevo desde lejos, o usa un dilophosaurus domesticado."
+    },
+    {
+      "es": "Las hogueras aceleran la incubación en cualquier clima y los hornos encendidos también."
+    },
+    {
+      "es": "Lleva comida: alimentar a una criatura domesticada la cura."
+    },
+    {
+      "es": "Evita luchar cerca de un T. rex: el ruido lo atrae."
+    }
+  ]
+}

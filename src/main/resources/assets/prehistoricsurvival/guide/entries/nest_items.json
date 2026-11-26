@@ -1,0 +1,19 @@
+{
+  "id": "nest_items",
+  "section": "items",
+  "order": 3,
+  "since": "0.3.0",
+  "title": {
+    "es": "Nidos y huevos",
+    "en": "Nests and eggs"
+  },
+  "facts": [],
+  "text": [
+    {
+      "es": "Los nidos se fabrican (ver Nidos). Los huevos se recogen de los nidos; puedes llevarlos y colocarlos donde quieras."
+    },
+    {
+      "es": "Para obtener huevos en creativo usa la pestaña del mod. Un huevo sin datos se comporta como uno nuevo de su especie."
+    }
+  ]
+}

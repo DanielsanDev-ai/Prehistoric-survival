@@ -1,0 +1,35 @@
+{
+  "id": "nests",
+  "section": "life",
+  "order": 3,
+  "since": "0.3.0",
+  "title": {
+    "es": "Nidos",
+    "en": "Nests"
+  },
+  "facts": [
+    {
+      "es": "Paja: dodo"
+    },
+    {
+      "es": "Barro: raptor, dilo"
+    },
+    {
+      "es": "Montículo: T. rex"
+    }
+  ],
+  "text": [
+    {
+      "es": "Las hembras prefieren poner sus huevos en un nido. Hay tres tipos y cada especie prefiere uno:"
+    },
+    {
+      "es": "NIDO DE PAJA (dodo): 2 palos y 3 trigos. NIDO DE BARRO (velociraptor y dilophosaurus): 2 palos y 3 barros. MONTÍCULO (T. rex): 2 troncos y 6 barros."
+    },
+    {
+      "es": "En un nido el huevo queda hundido en la cavidad y se incuba más rápido: x1,5 en el nido que su especie prefiere y x1,25 en cualquier otro. Si no hay ningún nido cerca, la hembra pone el huevo en el suelo."
+    },
+    {
+      "es": "Con suerte puedes encontrar nidos salvajes con un huevo: cerca de un 30% de las hembras adultas que aparecen en el mundo tienen uno. ¡Cuidado, la madre lo vigila!"
+    }
+  ]
+}

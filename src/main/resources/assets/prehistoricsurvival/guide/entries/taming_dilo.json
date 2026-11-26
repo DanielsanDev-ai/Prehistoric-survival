@@ -1,0 +1,37 @@
+{
+  "id": "taming_dilo",
+  "section": "taming",
+  "order": 5,
+  "since": "0.3.0",
+  "title": {
+    "es": "Domesticar un dilophosaurus",
+    "en": "Taming a dilophosaurus"
+  },
+  "facts": [
+    {
+      "es": "Pescado crudo"
+    },
+    {
+      "es": "1 cada 2,5 min"
+    },
+    {
+      "es": "5 pescados (nivel 1)"
+    }
+  ],
+  "text": [
+    {
+      "es": "Método: CONFIANZA Y TIEMPO. Dale pescado crudo (bacalao, salmón o pez tropical) con clic derecho."
+    },
+    {
+      "es": "Solo acepta un pescado cada 2 minutos y medio; si lo intentas antes, te dirá cuánto falta. Necesita 5 pescados a nivel 1 (unos 12 minutos)."
+    },
+    {
+      "es": "Sus escupitajos ciegan y ralentizan: no lo provoques o perderás su confianza."
+    }
+  ],
+  "preview": {
+    "entity": "prehistoricsurvival:dilophosaurus",
+    "stage": "adult",
+    "alpha": false
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "id": "resources",
+  "section": "items",
+  "order": 2,
+  "since": "0.3.0",
+  "title": {
+    "es": "Recursos especiales",
+    "en": "Special resources"
+  },
+  "facts": [],
+  "text": [
+    {
+      "es": "PLUMA DE DODO, GARRA DE RAPTOR, DIENTE DE T. REX y GLÁNDULA DE VENENO: el recurso propio de cada especie, para cazadores."
+    },
+    {
+      "es": "ESENCIA ALFA: la sueltan siempre las criaturas alfa."
+    },
+    {
+      "es": "Por ahora son trofeos de caza: en futuras versiones se usarán para fabricar armas, armaduras y objetos especiales."
+    }
+  ]
+}

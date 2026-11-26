@@ -6,10 +6,7 @@
     "minecraft:ocelot",
     "prehistoricsurvival:velociraptor",
     "prehistoricsurvival:tyrannosaurus",
-    {
-      "id": "prehistoricsurvival:dilophosaurus",
-      "required": false
-    },
+    "prehistoricsurvival:dilophosaurus",
     {
       "id": "prehistoricsurvival:carnotaurus",
       "required": false

@@ -1,0 +1,58 @@
+{
+  "id": "velociraptor",
+  "section": "creatures",
+  "order": 2,
+  "since": "0.3.0",
+  "title": {
+    "es": "Velociraptor",
+    "en": "Velociraptor"
+  },
+  "facts": [
+    {
+      "es": "Dieta: carnívoro"
+    },
+    {
+      "es": "Cadera: ~0,5 m"
+    },
+    {
+      "es": "Vida: 28, daño: 5"
+    },
+    {
+      "es": "Tame: sigilo"
+    },
+    {
+      "es": "Drop: garra"
+    }
+  ],
+  "text": [
+    {
+      "es": "Pequeño, veloz y muy inteligente. Es el cazador de manada del ecosistema: caza solo con hambre, acecha despacio y de repente carga; los de la manada se avisan con una llamada y rodean a la presa desde ángulos distintos."
+    },
+    {
+      "es": "Tamaño real: ~0,5 m de cadera y unos 1,7 m de largo. Plumas en los brazos y un abanico de plumas en la cola. Los machos lucen una cresta y una garganta de color; las hembras son más discretas."
+    },
+    {
+      "es": "Cazan dodos, gallinas, conejos, ovejas y cerdos. Si lo hieren de gravedad, huye. Huye del T. rex."
+    },
+    {
+      "es": "Dónde encontrarlo: junglas, bosques, sabanas y llanuras, en grupos de 2 a 4."
+    },
+    {
+      "es": "Cómo domesticarlo: SIGILO. Con carne cruda en la mano, agáchate (Shift) y dásela despacio. De pie, desconfía. Necesita 8 comidas (más con el nivel)."
+    },
+    {
+      "es": "Pone sus huevos en nidos de barro. Al morir suelta carne, garras de raptor y a veces cuero."
+    }
+  ],
+  "preview": {
+    "entity": "prehistoricsurvival:velociraptor",
+    "stage": "baby",
+    "alpha": false,
+    "stages": [
+      "baby",
+      "teen",
+      "adult",
+      "alpha"
+    ]
+  }
+}

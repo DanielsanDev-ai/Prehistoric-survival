@@ -1,5 +1,6 @@
 package com.prehistoricsurvival.entity;
 
+import com.prehistoricsurvival.entity.ai.FollowParentGoal;
 import com.prehistoricsurvival.entity.ai.GrazeGoal;
 import com.prehistoricsurvival.entity.ai.LayEggGoal;
 import com.prehistoricsurvival.entity.ai.MateGoal;
@@ -8,6 +9,8 @@ import com.prehistoricsurvival.entity.ai.SleepAtNightGoal;
 import com.prehistoricsurvival.entity.ai.StayNearHerdGoal;
 import com.prehistoricsurvival.registry.ModSounds;
 import com.prehistoricsurvival.registry.ModTags;
+import javax.annotation.Nullable;
+
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntitySelector;
@@ -108,6 +111,7 @@ public class DodoEntity extends PrehistoricEntity {
         this.goalSelector.addGoal(5, new FollowOwnerGoal(this, 1.1, 8.0f, 2.5f, false));
         this.goalSelector.addGoal(6, new TemptGoal(this, 1.1, Ingredient.of(FOODS), false));
         this.goalSelector.addGoal(7, new GrazeGoal(this));
+        this.goalSelector.addGoal(7, new FollowParentGoal(this, 1.1));
         this.goalSelector.addGoal(8, new StayNearNestGoal(this));
         this.goalSelector.addGoal(8, new MateGoal(this));
         this.goalSelector.addGoal(8, new StayNearHerdGoal(this, 1.0, 9.0));
@@ -135,29 +139,32 @@ public class DodoEntity extends PrehistoricEntity {
     protected void onAttacked(LivingEntity attacker) {
         super.onAttacked(attacker);
         if (!isTame()) {
-            playSound(ModSounds.DODO_ALERT.get(), getSoundVolume(), getVoicePitch());
+            playSound(isAlpha() ? ModSounds.DODO_ALERT_ALPHA.get() : ModSounds.DODO_ALERT.get(),
+                    getSoundVolume(), getVoicePitch());
         }
     }
 
     // ------------------------------------------------------------------ sonidos
 
+    @Nullable
+    @Override
+    protected SoundEvent getStepSoundEvent() {
+        return ModSounds.DODO_STEP.get();
+    }
+
     @Override
     protected SoundEvent getAmbientSound() {
-        return isBaby() ? ModSounds.DODO_CHICK.get() : ModSounds.DODO_AMBIENT.get();
+        if (isBaby()) return ModSounds.DODO_CHICK.get();
+        return isAlpha() ? ModSounds.DODO_AMBIENT_ALPHA.get() : ModSounds.DODO_AMBIENT.get();
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return ModSounds.DODO_HURT.get();
+        return isAlpha() ? ModSounds.DODO_HURT_ALPHA.get() : ModSounds.DODO_HURT.get();
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return ModSounds.DODO_DEATH.get();
-    }
-
-    @Override
-    public float getVoicePitch() {
-        return super.getVoicePitch() * (isAlpha() ? 0.75f : 1.0f);
+        return isAlpha() ? ModSounds.DODO_DEATH_ALPHA.get() : ModSounds.DODO_DEATH.get();
     }
 }

@@ -1,0 +1,37 @@
+{
+  "id": "venom",
+  "section": "behavior",
+  "order": 4,
+  "since": "0.3.0",
+  "title": {
+    "es": "Veneno del dilophosaurus",
+    "en": "Dilophosaurus venom"
+  },
+  "facts": [
+    {
+      "es": "Ralentización"
+    },
+    {
+      "es": "Ceguera"
+    },
+    {
+      "es": "Recarga: 10 s"
+    }
+  ],
+  "text": [
+    {
+      "es": "Cuando tiene un objetivo a media distancia, se detiene, despliega la gorguera con cascabeleo y escupe una bola de veneno verde con una estela de partículas."
+    },
+    {
+      "es": "Efecto del impacto: ralentización II durante 8 s, ceguera durante 5 s y 2 de daño. El del alfa: ralentización III 12 s, ceguera 8 s y 4 de daño. Recarga: 10 s (alfa 7 s)."
+    },
+    {
+      "es": "Consejo: refúgiate tras un bloque; el veneno no atraviesa el terreno. Los dilophosaurus no se dañan entre sí con él."
+    }
+  ],
+  "preview": {
+    "entity": "prehistoricsurvival:dilophosaurus",
+    "stage": "adult",
+    "alpha": false
+  }
+}

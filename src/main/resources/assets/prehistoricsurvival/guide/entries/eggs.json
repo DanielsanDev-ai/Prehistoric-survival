@@ -1,0 +1,38 @@
+{
+  "id": "eggs",
+  "section": "life",
+  "order": 4,
+  "since": "0.3.0",
+  "title": {
+    "es": "Huevos e incubación",
+    "en": "Eggs and incubation"
+  },
+  "facts": [
+    {
+      "es": "Necesita calor"
+    },
+    {
+      "es": "Se puede transportar"
+    },
+    {
+      "es": "3 fases de grietas"
+    }
+  ],
+  "text": [
+    {
+      "es": "Cada especie pone un huevo distinto: el dodo crema con motas marrones, el velociraptor verde moteado, el tyrannosaurus grande y gris manchado y el dilophosaurus verde azulado con bandas."
+    },
+    {
+      "es": "Para incubar necesita calor: avanza solo en biomas cálidos (jungla, llanura, sabana...) o cerca de una hoguera encendida, un horno encendido o un bloque de magma (x1,5). En el frío no avanza y aparecen copos de nieve."
+    },
+    {
+      "es": "Mientras incuba brotan motas verdes (y chispas si hay calor extra). El cascarón se agrieta en tres fases y cruje antes de romperse."
+    },
+    {
+      "es": "Incubación base: dodo 7,5 min, velociraptor y dilophosaurus 10 min, T. rex 15 min."
+    },
+    {
+      "es": "Puedes recoger el huevo y llevarlo: conserva especie, genética y progreso. Si colocas un huevo de un animal domesticado, la cría nacerá domesticada."
+    }
+  ]
+}

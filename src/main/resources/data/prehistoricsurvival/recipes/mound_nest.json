@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "L L",
+    "MMM",
+    "MMM"
+  ],
+  "key": {
+    "L": {
+      "tag": "minecraft:logs"
+    },
+    "M": {
+      "item": "minecraft:mud"
+    }
+  },
+  "result": {
+    "item": "prehistoricsurvival:mound_nest"
+  }
+}

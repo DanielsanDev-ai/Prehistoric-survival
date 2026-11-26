@@ -28,24 +28,37 @@ public class DodoModel extends EntityModel<DodoEntity> {
             new ModelLayerLocation(new ResourceLocation(PrehistoricSurvival.MOD_ID, "dodo"), "main");
 
     private final ModelPart root;
-    private final ModelPart adult, baby;
+    private final ModelPart adult, teen, baby;
     // adulto
-    private final ModelPart neck, head, legR, legL, wingR, wingL, tail;
+    private final ModelPart neck, head, legR, legL, wingR, wingL, tail, crest;
+    // adolescente
+    private final ModelPart tNeck, tHead, tLegR, tLegL, tWingR, tWingL, tTail, tCrest;
     // bebe
     private final ModelPart bHead, bLegR, bLegL, bWingR, bWingL;
 
     public DodoModel(ModelPart root) {
         this.root = root;
         this.adult = root.getChild("adult");
+        this.teen = root.getChild("teen");
         this.baby = root.getChild("baby");
 
         this.neck = adult.getChild("neck");
         this.head = neck.getChild("head");
+        this.crest = head.getChild("crest");
         this.legR = adult.getChild("leg_right");
         this.legL = adult.getChild("leg_left");
         this.wingR = adult.getChild("wing_right");
         this.wingL = adult.getChild("wing_left");
         this.tail = adult.getChild("tail");
+
+        this.tNeck = teen.getChild("neck");
+        this.tHead = tNeck.getChild("head");
+        this.tCrest = tHead.getChild("crest");
+        this.tLegR = teen.getChild("leg_right");
+        this.tLegL = teen.getChild("leg_left");
+        this.tWingR = teen.getChild("wing_right");
+        this.tWingL = teen.getChild("wing_left");
+        this.tTail = teen.getChild("tail");
 
         this.bHead = baby.getChild("head");
         this.bLegR = baby.getChild("leg_right");
@@ -66,7 +79,9 @@ public class DodoModel extends EntityModel<DodoEntity> {
                 .texOffs(0, 18).addBox(-1.5f, -5f, -1.5f, 3f, 5f, 3f), PartPose.offset(0f, 11f, -4f));
         neck.addOrReplaceChild("head", CubeListBuilder.create()
                 .texOffs(0, 28).addBox(-2.5f, -4f, -2.5f, 5f, 4f, 5f)
-                .texOffs(20, 28).addBox(-1.5f, -3f, -6.5f, 3f, 3f, 4f), PartPose.offset(0f, -5f, 0f));
+                .texOffs(20, 28).addBox(-1.5f, -3f, -6.5f, 3f, 3f, 4f), PartPose.offset(0f, -5f, 0f))
+                .addOrReplaceChild("crest", CubeListBuilder.create()
+                        .texOffs(50, 89).addBox(-1.5f, -3f, -1f, 3f, 3f, 2f), PartPose.offset(0f, -4f, -0.5f));
         adult.addOrReplaceChild("leg_right", CubeListBuilder.create()
                 .texOffs(0, 40).addBox(-1f, 0f, -1f, 2f, 6f, 2f), PartPose.offset(-2.5f, 18f, 0.5f));
         adult.addOrReplaceChild("leg_left", CubeListBuilder.create()
@@ -77,6 +92,28 @@ public class DodoModel extends EntityModel<DodoEntity> {
                 .texOffs(14, 50).addBox(0f, 0f, -3f, 1f, 5f, 6f), PartPose.offset(4f, 11f, -1f));
         adult.addOrReplaceChild("tail", CubeListBuilder.create()
                 .texOffs(36, 0).addBox(-3f, -2f, 0f, 6f, 4f, 3f), PartPose.offsetAndRotation(0f, 11f, 5f, -0.35f, 0f, 0f));
+
+        // ---------------- ADOLESCENTE: cuerpo mas esbelto, cuello largo, cabeza grande y patas largas
+        PartDefinition teen = root.addOrReplaceChild("teen", CubeListBuilder.create(), PartPose.ZERO);
+        teen.addOrReplaceChild("body", CubeListBuilder.create()
+                .texOffs(0, 64).addBox(-3.5f, -3.5f, -4.5f, 7f, 7f, 9f), PartPose.offset(0f, 13.5f, 0f));
+        PartDefinition tneck = teen.addOrReplaceChild("neck", CubeListBuilder.create()
+                .texOffs(32, 64).addBox(-1.5f, -6f, -1.5f, 3f, 6f, 3f), PartPose.offset(0f, 10.5f, -3.5f));
+        tneck.addOrReplaceChild("head", CubeListBuilder.create()
+                .texOffs(44, 64).addBox(-2.5f, -5f, -2.5f, 5f, 5f, 5f)
+                .texOffs(0, 80).addBox(-1.5f, -3.5f, -6.5f, 3f, 3f, 4f), PartPose.offset(0f, -6f, 0f))
+                .addOrReplaceChild("crest", CubeListBuilder.create()
+                        .texOffs(50, 89).addBox(-1.5f, -3f, -1f, 3f, 3f, 2f), PartPose.offset(0f, -5f, -0.5f));
+        teen.addOrReplaceChild("leg_right", CubeListBuilder.create()
+                .texOffs(14, 80).addBox(-1f, 0f, -1f, 2f, 7f, 2f), PartPose.offset(-2.5f, 17f, 0.5f));
+        teen.addOrReplaceChild("leg_left", CubeListBuilder.create()
+                .texOffs(22, 80).addBox(-1f, 0f, -1f, 2f, 7f, 2f), PartPose.offset(2.5f, 17f, 0.5f));
+        teen.addOrReplaceChild("wing_right", CubeListBuilder.create()
+                .texOffs(30, 80).addBox(-1f, 0f, -2.5f, 1f, 4f, 5f), PartPose.offset(-3.5f, 11f, -1f));
+        teen.addOrReplaceChild("wing_left", CubeListBuilder.create()
+                .texOffs(42, 80).addBox(0f, 0f, -2.5f, 1f, 4f, 5f), PartPose.offset(3.5f, 11f, -1f));
+        teen.addOrReplaceChild("tail", CubeListBuilder.create()
+                .texOffs(0, 89).addBox(-2.5f, -1.5f, 0f, 5f, 3f, 2f), PartPose.offsetAndRotation(0f, 11f, 4.5f, -0.3f, 0f, 0f));
 
         // ---------------- BEBE
         PartDefinition baby = root.addOrReplaceChild("baby", CubeListBuilder.create(), PartPose.ZERO);
@@ -94,15 +131,16 @@ public class DodoModel extends EntityModel<DodoEntity> {
         baby.addOrReplaceChild("wing_left", CubeListBuilder.create()
                 .texOffs(36, 8).addBox(0f, 0f, -2f, 1f, 3f, 4f), PartPose.offset(3.5f, 14.5f, -0.5f));
 
-        return LayerDefinition.create(mesh, 64, 64);
+        return LayerDefinition.create(mesh, 64, 96);
     }
 
     @Override
     public void setupAnim(DodoEntity entity, float limbSwing, float limbSwingAmount,
                           float ageInTicks, float netHeadYaw, float headPitch) {
-        boolean isBaby = entity.getStage() == GrowthStage.BABY;
-        adult.visible = !isBaby;
-        baby.visible = isBaby;
+        GrowthStage stage = entity.getStage();
+        adult.visible = stage == GrowthStage.ADULT;
+        teen.visible = stage == GrowthStage.JUVENILE;
+        baby.visible = stage == GrowthStage.BABY;
 
         EntityAction action = entity.getAction();
         boolean asleep = action == EntityAction.SLEEPING;
@@ -117,7 +155,7 @@ public class DodoModel extends EntityModel<DodoEntity> {
         float yaw = netHeadYaw * Mth.DEG_TO_RAD;
         float pitch = headPitch * Mth.DEG_TO_RAD;
 
-        if (isBaby) {
+        if (stage == GrowthStage.BABY) {
             baby.y = crouch ? 3f : 0f;
             bLegR.visible = !crouch;
             bLegL.visible = !crouch;
@@ -138,27 +176,38 @@ public class DodoModel extends EntityModel<DodoEntity> {
             return;
         }
 
-        adult.y = crouch ? 4f : 0f;
-        legR.visible = !crouch;
-        legL.visible = !crouch;
-        legR.xRot = legA;
-        legL.xRot = legB;
-        wingR.zRot = flap;
-        wingL.zRot = -flap;
-        tail.yRot = Mth.sin(swing * 0.6662f) * 0.3f * amount + Mth.sin(ageInTicks * 0.1f) * 0.05f;
+        boolean isTeen = stage == GrowthStage.JUVENILE;
+        ModelPart group = isTeen ? teen : adult;
+        ModelPart n = isTeen ? tNeck : neck;
+        ModelPart h = isTeen ? tHead : head;
+        ModelPart lr = isTeen ? tLegR : legR;
+        ModelPart ll = isTeen ? tLegL : legL;
+        ModelPart wr = isTeen ? tWingR : wingR;
+        ModelPart wl = isTeen ? tWingL : wingL;
+        ModelPart t = isTeen ? tTail : tail;
+        (isTeen ? tCrest : crest).visible = entity.isAlpha();   // cresta de plumas: solo los alfas
+
+        group.y = crouch ? (isTeen ? 5f : 4f) : 0f;
+        lr.visible = !crouch;
+        ll.visible = !crouch;
+        lr.xRot = legA;
+        ll.xRot = legB;
+        wr.zRot = flap;
+        wl.zRot = -flap;
+        t.yRot = Mth.sin(swing * 0.6662f) * 0.3f * amount + Mth.sin(ageInTicks * 0.1f) * 0.05f;
 
         if (asleep) {
-            neck.xRot = 0.9f;
-            head.xRot = 0.5f;
-            head.yRot = 2.4f;
+            n.xRot = 0.9f;
+            h.xRot = 0.5f;
+            h.yRot = 2.4f;
         } else if (eating) {
-            neck.xRot = 0.9f + Mth.sin(ageInTicks * 0.9f) * 0.35f;
-            head.xRot = 0.5f;
-            head.yRot = 0f;
+            n.xRot = 0.9f + Mth.sin(ageInTicks * 0.9f) * 0.35f;
+            h.xRot = 0.5f;
+            h.yRot = 0f;
         } else {
-            neck.xRot = Mth.cos(swing * 0.6662f * 2f) * 0.08f * amount;
-            head.xRot = pitch;
-            head.yRot = yaw;
+            n.xRot = Mth.cos(swing * 0.6662f * 2f) * 0.08f * amount;
+            h.xRot = pitch;
+            h.yRot = yaw;
         }
     }
 

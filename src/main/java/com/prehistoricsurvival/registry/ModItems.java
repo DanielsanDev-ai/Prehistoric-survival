@@ -2,6 +2,7 @@ package com.prehistoricsurvival.registry;
 
 import com.prehistoricsurvival.PrehistoricSurvival;
 import com.prehistoricsurvival.block.DinoEggItem;
+import com.prehistoricsurvival.item.ExplorerGuideItem;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -14,6 +15,10 @@ import net.minecraftforge.registries.RegistryObject;
 public final class ModItems {
     public static final DeferredRegister<Item> ITEMS =
             DeferredRegister.create(ForgeRegistries.ITEMS, PrehistoricSurvival.MOD_ID);
+
+    // ---- libro-enciclopedia
+    public static final RegistryObject<Item> EXPLORER_GUIDE = ITEMS.register("explorer_guide",
+            () -> new ExplorerGuideItem(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
 
     // ---- carne
     public static final RegistryObject<Item> RAW_DINO_MEAT = ITEMS.register("raw_dino_meat",
@@ -33,19 +38,32 @@ public final class ModItems {
             () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> REX_TOOTH = ITEMS.register("rex_tooth",
             () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> VENOM_GLAND = ITEMS.register("venom_gland",
+            () -> new Item(new Item.Properties()));
     /** Recurso especial que sueltan los alfas de cualquier especie. */
     public static final RegistryObject<Item> ALPHA_ESSENCE = ITEMS.register("alpha_essence",
             () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
+    /** Aspecto del proyectil de veneno del dilophosaurus. */
+    public static final RegistryObject<Item> VENOM_GLOB = ITEMS.register("venom_glob",
+            () -> new Item(new Item.Properties()));
 
     // ---- nidos y huevos
     public static final RegistryObject<Item> NEST = ITEMS.register("nest",
             () -> new BlockItem(ModBlocks.NEST.get(), new Item.Properties()));
+    public static final RegistryObject<Item> MUD_NEST = ITEMS.register("mud_nest",
+            () -> new BlockItem(ModBlocks.MUD_NEST.get(), new Item.Properties()));
+    public static final RegistryObject<Item> MOUND_NEST = ITEMS.register("mound_nest",
+            () -> new BlockItem(ModBlocks.MOUND_NEST.get(), new Item.Properties()));
+
     public static final RegistryObject<Item> DODO_EGG = ITEMS.register("dodo_egg",
             () -> new DinoEggItem(ModBlocks.DINO_EGG.get(), new Item.Properties().stacksTo(8),
                     "prehistoricsurvival:dodo", 9000));
     public static final RegistryObject<Item> VELOCIRAPTOR_EGG = ITEMS.register("velociraptor_egg",
             () -> new DinoEggItem(ModBlocks.DINO_EGG.get(), new Item.Properties().stacksTo(8),
                     "prehistoricsurvival:velociraptor", 12000));
+    public static final RegistryObject<Item> DILOPHOSAURUS_EGG = ITEMS.register("dilophosaurus_egg",
+            () -> new DinoEggItem(ModBlocks.DINO_EGG.get(), new Item.Properties().stacksTo(8),
+                    "prehistoricsurvival:dilophosaurus", 12000));
     public static final RegistryObject<Item> TYRANNOSAURUS_EGG = ITEMS.register("tyrannosaurus_egg",
             () -> new DinoEggItem(ModBlocks.DINO_EGG.get(), new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON),
                     "prehistoricsurvival:tyrannosaurus", 18000));
@@ -55,6 +73,8 @@ public final class ModItems {
             () -> new ForgeSpawnEggItem(ModEntities.DODO, 0x7d6a55, 0xd8c26a, new Item.Properties()));
     public static final RegistryObject<Item> VELOCIRAPTOR_SPAWN_EGG = ITEMS.register("velociraptor_spawn_egg",
             () -> new ForgeSpawnEggItem(ModEntities.VELOCIRAPTOR, 0x5f6e40, 0xc8552f, new Item.Properties()));
+    public static final RegistryObject<Item> DILOPHOSAURUS_SPAWN_EGG = ITEMS.register("dilophosaurus_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntities.DILOPHOSAURUS, 0x3d7a54, 0xe8842a, new Item.Properties()));
     public static final RegistryObject<Item> TYRANNOSAURUS_SPAWN_EGG = ITEMS.register("tyrannosaurus_spawn_egg",
             () -> new ForgeSpawnEggItem(ModEntities.TYRANNOSAURUS, 0x4b5a3a, 0x9a8a6a, new Item.Properties()));
 
@@ -62,6 +82,7 @@ public final class ModItems {
     public static Item eggFor(String speciesId) {
         if (speciesId.endsWith("velociraptor")) return VELOCIRAPTOR_EGG.get();
         if (speciesId.endsWith("tyrannosaurus")) return TYRANNOSAURUS_EGG.get();
+        if (speciesId.endsWith("dilophosaurus")) return DILOPHOSAURUS_EGG.get();
         return DODO_EGG.get();
     }
 

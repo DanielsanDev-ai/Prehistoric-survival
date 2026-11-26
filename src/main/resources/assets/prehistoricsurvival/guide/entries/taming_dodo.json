@@ -1,0 +1,34 @@
+{
+  "id": "taming_dodo",
+  "section": "taming",
+  "order": 2,
+  "since": "0.3.0",
+  "title": {
+    "es": "Domesticar un dodo",
+    "en": "Taming a dodo"
+  },
+  "facts": [
+    {
+      "es": "Semillas / bayas"
+    },
+    {
+      "es": "4 comidas (nivel 1)"
+    }
+  ],
+  "text": [
+    {
+      "es": "Método: COMIDA. Dale semillas (trigo, remolacha, melón o calabaza) o bayas dulces con clic derecho."
+    },
+    {
+      "es": "Cada comida (con 5 segundos de espera entre una y otra) sube su confianza. Con 4 comidas a nivel 1 es tuyo."
+    },
+    {
+      "es": "Consejo: acércate sin golpearlo; los dodos curiosos te miran, pero huyen si alguien ataca a la bandada."
+    }
+  ],
+  "preview": {
+    "entity": "prehistoricsurvival:dodo",
+    "stage": "adult",
+    "alpha": false
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "id": "hunting",
+  "section": "behavior",
+  "order": 2,
+  "since": "0.3.0",
+  "title": {
+    "es": "Caza y manadas",
+    "en": "Hunting and packs"
+  },
+  "facts": [
+    {
+      "es": "Solo con hambre"
+    },
+    {
+      "es": "Acecho > carga"
+    }
+  ],
+  "text": [
+    {
+      "es": "Un carnívoro caza solo con hambre (por debajo del 60%), sano (más del 50% de vida) y despierto. Elige presas pequeñas (raptor y dilophosaurus) o grandes (T. rex) y nunca mascotas."
+    },
+    {
+      "es": "La caza tiene dos fases: ACECHO (se acerca despacio mirando) y CARGA (sprint y mordisco). En manada, el primero avisa a los demás con una llamada y cada uno rodea a la presa desde un lado."
+    },
+    {
+      "es": "Si el depredador baja del 25% de vida, abandona la lucha y huye."
+    },
+    {
+      "es": "Después de abatir a la presa, va a comérsela con animación de comer y deja huesos y restos."
+    }
+  ]
+}

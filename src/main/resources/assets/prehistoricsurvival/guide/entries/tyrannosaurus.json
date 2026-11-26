@@ -1,0 +1,58 @@
+{
+  "id": "tyrannosaurus",
+  "section": "creatures",
+  "order": 3,
+  "since": "0.3.0",
+  "title": {
+    "es": "Tyrannosaurus rex",
+    "en": "Tyrannosaurus rex"
+  },
+  "facts": [
+    {
+      "es": "Dieta: carnívoro"
+    },
+    {
+      "es": "Cadera: ~3 m"
+    },
+    {
+      "es": "Vida: 160, daño: 22"
+    },
+    {
+      "es": "Tame: sedación"
+    },
+    {
+      "es": "Drop: diente"
+    }
+  ],
+  "text": [
+    {
+      "es": "El gran depredador. Solitario y territorial, domina su zona: vigila a 18 bloques, avisa con rugidos y solo ataca si insistes. Acude a investigar los combates que oiga a menos de 48 bloques."
+    },
+    {
+      "es": "Tamaño real: ~3 m de cadera, cabeza a unos 5 m y ~9 m de largo; las hembras son más grandes que los machos. Un bebé mide apenas un 20% de un adulto."
+    },
+    {
+      "es": "Caza presas grandes (vacas, caballos, ovejas, cerdos, llamas...) y también raptores, dodos y dilophosaurus. Come el cadáver de lo que abate."
+    },
+    {
+      "es": "Dónde encontrarlo: junglas, sabanas y bosques. Es muy raro: aparece de uno en uno."
+    },
+    {
+      "es": "Cómo domesticarlo: SEDACIÓN. Dale carne sedante para dormirlo y, mientras duerme, carne cocinada. Necesita 10 comidas (más con el nivel). Si despierta, ¡te ataca!"
+    },
+    {
+      "es": "Pone sus huevos en montículos de ramas y barro. Suelta carne y dientes de T. rex."
+    }
+  ],
+  "preview": {
+    "entity": "prehistoricsurvival:tyrannosaurus",
+    "stage": "baby",
+    "alpha": false,
+    "stages": [
+      "baby",
+      "teen",
+      "adult",
+      "alpha"
+    ]
+  }
+}

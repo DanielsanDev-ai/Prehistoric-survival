@@ -1,6 +1,9 @@
 package com.prehistoricsurvival.entity;
 
+import javax.annotation.Nullable;
+
 import com.prehistoricsurvival.entity.ai.EatCarcassGoal;
+import com.prehistoricsurvival.entity.ai.FollowParentGoal;
 import com.prehistoricsurvival.entity.ai.HuntGoal;
 import com.prehistoricsurvival.entity.ai.HuntTargetGoal;
 import com.prehistoricsurvival.entity.ai.IntruderWarningGoal;
@@ -13,7 +16,6 @@ import com.prehistoricsurvival.entity.ai.StayNearNestGoal;
 import com.prehistoricsurvival.registry.ModItems;
 import com.prehistoricsurvival.registry.ModSounds;
 import com.prehistoricsurvival.registry.ModTags;
-import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -35,7 +37,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.BlockState;
 
 /**
  * Tyrannosaurus rex (tamano real: ~3 m de cadera, ~9 m de largo; las hembras son mas grandes).
@@ -111,6 +112,7 @@ public class TyrannosaurusEntity extends PrehistoricEntity {
         this.goalSelector.addGoal(8, new SleepAtNightGoal(this));
         this.goalSelector.addGoal(9, new FollowOwnerGoal(this, 1.0, 10.0f, 3.0f, false));
         this.goalSelector.addGoal(10, new MateGoal(this));
+        this.goalSelector.addGoal(10, new FollowParentGoal(this, 1.0));
         this.goalSelector.addGoal(11, new StayNearNestGoal(this));
         this.goalSelector.addGoal(12, new WaterAvoidingRandomStrollGoal(this, 0.7));
         this.goalSelector.addGoal(13, new LookAtPlayerGoal(this, Player.class, 10.0f));
@@ -125,47 +127,40 @@ public class TyrannosaurusEntity extends PrehistoricEntity {
 
     @Override
     public boolean doHurtTarget(Entity target) {
-        playSound(ModSounds.REX_ATTACK.get(), 1.6f, getVoicePitch());
+        playSound(isAlpha() ? ModSounds.REX_ATTACK_ALPHA.get() : ModSounds.REX_ATTACK.get(), isAlpha() ? 2.4f : 1.6f, getVoicePitch());
         return super.doHurtTarget(target);
     }
 
     @Override
     public void playWarnSound() {
-        playSound(ModSounds.REX_WARN.get(), 2.0f, getVoicePitch());
+        playSound(isAlpha() ? ModSounds.REX_WARN_ALPHA.get() : ModSounds.REX_WARN.get(), isAlpha() ? 3.0f : 2.0f, getVoicePitch());
     }
 
     /** Pisadas pesadas propias. */
+    @Nullable
     @Override
-    protected void playStepSound(BlockPos pos, BlockState state) {
-        if (isBaby()) {
-            super.playStepSound(pos, state);
-        } else {
-            playSound(ModSounds.REX_STEP.get(), 0.9f, 0.9f + getRandom().nextFloat() * 0.2f);
-        }
+    protected SoundEvent getStepSoundEvent() {
+        return ModSounds.REX_STEP.get();
     }
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return isBaby() ? ModSounds.REX_CHICK.get() : ModSounds.REX_AMBIENT.get();
+        if (isBaby()) return ModSounds.REX_CHICK.get();
+        return isAlpha() ? ModSounds.REX_AMBIENT_ALPHA.get() : ModSounds.REX_AMBIENT.get();
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return ModSounds.REX_HURT.get();
+        return isAlpha() ? ModSounds.REX_HURT_ALPHA.get() : ModSounds.REX_HURT.get();
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return ModSounds.REX_DEATH.get();
-    }
-
-    @Override
-    public float getVoicePitch() {
-        return super.getVoicePitch() * (isAlpha() ? 0.8f : 1.0f);
+        return isAlpha() ? ModSounds.REX_DEATH_ALPHA.get() : ModSounds.REX_DEATH.get();
     }
 
     @Override
     protected float getSoundVolume() {
-        return 2.0f;
+        return isAlpha() ? 3.0f : 2.0f;
     }
 }

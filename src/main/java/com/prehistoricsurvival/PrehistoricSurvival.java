@@ -6,13 +6,16 @@ import com.prehistoricsurvival.registry.ModCreativeTabs;
 import com.prehistoricsurvival.registry.ModEntities;
 import com.prehistoricsurvival.registry.ModItems;
 import com.prehistoricsurvival.registry.ModSounds;
+import com.mojang.logging.LogUtils;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import org.slf4j.Logger;
 
 @Mod(PrehistoricSurvival.MOD_ID)
 public class PrehistoricSurvival {
     public static final String MOD_ID = "prehistoricsurvival";
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     public PrehistoricSurvival() {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();

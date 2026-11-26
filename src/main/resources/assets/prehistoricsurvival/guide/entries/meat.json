@@ -1,0 +1,22 @@
+{
+  "id": "meat",
+  "section": "items",
+  "order": 1,
+  "since": "0.3.0",
+  "title": {
+    "es": "Carne de dinosaurio",
+    "en": "Dino meat"
+  },
+  "facts": [],
+  "text": [
+    {
+      "es": "CARNE CRUDA: la sueltan todas las criaturas al morir. Alimento pobre; sirve para domesticar al raptor."
+    },
+    {
+      "es": "CARNE ASADA: se cocina en horno, ahumador u hoguera. Alimenta mucho y sirve para domesticar al T. rex."
+    },
+    {
+      "es": "Si matas a una criatura en llamas, la carne ya cae asada."
+    }
+  ]
+}

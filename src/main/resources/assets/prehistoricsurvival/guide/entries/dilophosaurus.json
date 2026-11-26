@@ -1,0 +1,58 @@
+{
+  "id": "dilophosaurus",
+  "section": "creatures",
+  "order": 4,
+  "since": "0.3.0",
+  "title": {
+    "es": "Dilophosaurus",
+    "en": "Dilophosaurus"
+  },
+  "facts": [
+    {
+      "es": "Dieta: carnívoro"
+    },
+    {
+      "es": "Cadera: ~1 m"
+    },
+    {
+      "es": "Vida: 40, daño: 6"
+    },
+    {
+      "es": "Tame: pescado+tiempo"
+    },
+    {
+      "es": "Drop: glándula"
+    }
+  ],
+  "text": [
+    {
+      "es": "Cazador de emboscada de dos crestas paralelas sobre el cráneo y una gorguera en el cuello que despliega como un abanico al amenazar o atacar, acompañada de un cascabeleo."
+    },
+    {
+      "es": "HABILIDAD: escupe un proyectil de veneno verdoso. Al impactar causa ralentización y ceguera temporales además de daño leve. Tiene 10 segundos de reutilización (7 s el alfa, cuyo veneno es más potente). Solo los adultos pueden escupir."
+    },
+    {
+      "es": "Tamaño real: ~1 m de cadera y ~4 m de largo. Caza animales pequeños y es territorial: advierte a 12 bloques (más cerca de su nido)."
+    },
+    {
+      "es": "Dónde encontrarlo: junglas, pantanos, manglares y bosques, en grupos de 1 o 2."
+    },
+    {
+      "es": "Cómo domesticarlo: CONFIANZA Y TIEMPO. Dale pescado crudo (bacalao, salmón o pez tropical) una vez cada 2 minutos y medio, sin atacarlo. Necesita 5 pescados (más con el nivel)."
+    },
+    {
+      "es": "Pone sus huevos en nidos de barro. Suelta carne y glándulas de veneno."
+    }
+  ],
+  "preview": {
+    "entity": "prehistoricsurvival:dilophosaurus",
+    "stage": "baby",
+    "alpha": false,
+    "stages": [
+      "baby",
+      "teen",
+      "adult",
+      "alpha"
+    ]
+  }
+}

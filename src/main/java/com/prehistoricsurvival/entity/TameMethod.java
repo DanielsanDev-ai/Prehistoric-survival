@@ -7,5 +7,7 @@ public enum TameMethod {
     /** Dar carne agachado y sin asustarlo; si te ve de pie desconfia (velociraptor). */
     STEALTH,
     /** Sedarlo con carne sedante y alimentarlo mientras duerme (tyrannosaurus). */
-    SEDATE
+    SEDATE,
+    /** Confianza y tiempo: pescado, una vez cada pocos minutos, sin atacarlo (dilophosaurus). */
+    TRUST
 }

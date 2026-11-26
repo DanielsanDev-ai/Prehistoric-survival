@@ -2,10 +2,13 @@ package com.prehistoricsurvival.entity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.annotation.Nullable;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -16,6 +19,8 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
@@ -23,6 +28,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.AgeableMob;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -37,11 +43,14 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
+import com.prehistoricsurvival.block.DinoEggBlock;
 import com.prehistoricsurvival.block.DinoEggBlockEntity;
+import com.prehistoricsurvival.block.NestBlock;
 import com.prehistoricsurvival.registry.ModBlocks;
 import com.prehistoricsurvival.registry.ModItems;
 
@@ -83,6 +92,10 @@ public abstract class PrehistoricEntity extends TamableAnimal {
     private int fatherLevel = 1;
     private int fatherVariant;
     private boolean fatherAlpha;
+
+    // familia: la cria sigue y es defendida por quien puso el huevo
+    @Nullable private UUID parentUUID;
+    private boolean pendingWildNest;
 
     // sedacion, nido y ruido
     private int sedatedTicks;
@@ -205,22 +218,23 @@ public abstract class PrehistoricEntity extends TamableAnimal {
         SpeciesData s = species();
         float ratio = getMaxHealth() > 0 ? getHealth() / getMaxHealth() : 1.0f;
 
-        double stage = switch (getStage()) {
-            case BABY -> 0.3;
-            case JUVENILE -> 0.65;
-            case ADULT -> 1.0;
-        };
-        double speedStage = switch (getStage()) {
-            case BABY -> 0.8;
-            case JUVENILE -> 0.92;
-            case ADULT -> 1.0;
-        };
+        // Las estadisticas crecen de forma continua con la edad (no a saltos entre etapas).
+        float growth = Mth.clamp(growthTicks / (float) Math.max(1, s.adultTicks()), 0f, 1f);
+        double stage = 0.3 + 0.7 * growth;
+        double speedStage = 0.8 + 0.2 * growth;
         double levelFactor = 1.0 + 0.06 * (getCreatureLevel() - 1);
         double alpha = isAlpha() ? s.alphaStatMultiplier() : 1.0;
 
         setBase(Attributes.MAX_HEALTH, s.baseHealth() * stage * levelFactor * alpha);
         setBase(Attributes.ATTACK_DAMAGE, s.baseDamage() * stage * (1.0 + 0.04 * (getCreatureLevel() - 1)) * alpha);
         setBase(Attributes.MOVEMENT_SPEED, s.baseSpeed() * speedStage * (1.0 + 0.004 * (getCreatureLevel() - 1)));
+
+        // Rasgos especiales del alfa: piel gruesa y mucha resistencia al empuje.
+        if (isAlpha()) {
+            setBase(Attributes.ARMOR, 4.0);
+            AttributeInstance kb = getAttribute(Attributes.KNOCKBACK_RESISTANCE);
+            if (kb != null) kb.setBaseValue(Math.max(kb.getBaseValue(), 0.5));
+        }
 
         setHealth(Math.max(1.0f, getMaxHealth() * ratio));
     }
@@ -255,6 +269,10 @@ public abstract class PrehistoricEntity extends TamableAnimal {
         this.growthTicks = growth;
         this.entityData.set(DATA_GROWTH, growth);
         this.lastStage = getStage();
+        // Algunas hembras salvajes adultas aparecen junto a su propio nido con un huevo.
+        this.pendingWildNest = !alpha && isFemale() && growth >= s.adultTicks() && s.gestationTicks() > 0
+                && (reason == MobSpawnType.NATURAL || reason == MobSpawnType.CHUNK_GENERATION)
+                && r.nextFloat() < 0.3f;
 
         setHunger(60 + r.nextInt(40));
         recalcStats();
@@ -280,7 +298,14 @@ public abstract class PrehistoricEntity extends TamableAnimal {
         if (stage != lastStage) {
             lastStage = stage;
             refreshDimensions();
-            if (!level().isClientSide) recalcStats();
+            if (!level().isClientSide) {
+                recalcStats();
+                if (level() instanceof ServerLevel serverLevel) {   // "estiron": nube de polvo y crujido
+                    serverLevel.sendParticles(ParticleTypes.POOF, getX(), getY() + getBbHeight() * 0.5, getZ(), 14,
+                            getBbWidth() * 0.3, getBbHeight() * 0.3, getBbWidth() * 0.3, 0.02);
+                    playSound(SoundEvents.TURTLE_EGG_CRACK, 0.6f, 0.8f);
+                }
+            }
         }
         int step = (int) (getBodyScale() * 50.0f);
         if (step != lastScaleStep) {
@@ -295,6 +320,10 @@ public abstract class PrehistoricEntity extends TamableAnimal {
             if (noiseCooldown > 0) noiseCooldown--;
             if (sedatedTicks > 0 && --sedatedTicks == 0) wakeFromSedation();
             if (carcassPos != null && ++carcassTicks > 1200) consumeCarcass(1.0f); // nadie vino a comer: se suelta el botin
+            if (pendingWildNest && tickCount > 40 && onGround()) {
+                pendingWildNest = false;
+                tryPlaceWildNest();
+            }
             if (tickCount % 100 == 0) serverSlowTick();
         }
     }
@@ -302,6 +331,7 @@ public abstract class PrehistoricEntity extends TamableAnimal {
     /** Se ejecuta cada 5 segundos: hambre, regeneracion, sincronizacion y perdida de confianza. */
     private void serverSlowTick() {
         this.entityData.set(DATA_GROWTH, growthTicks);
+        if (growthTicks < species().adultTicks() && tickCount % 600 == 0) recalcStats();   // estadisticas progresivas
 
         if (getAction() != EntityAction.SLEEPING || tickCount % 200 == 0) {
             setHunger(getHunger() - 1);
@@ -322,6 +352,9 @@ public abstract class PrehistoricEntity extends TamableAnimal {
         boolean result = super.hurt(source, amount);
         if (result && !level().isClientSide) {
             if (getAction() == EntityAction.SLEEPING) setAction(EntityAction.NONE);
+            if (!isTame() && source.getEntity() instanceof Player) {
+                setTameProgress(Math.max(0, getTameProgress() - 20));    // perdio la confianza
+            }
             if (source.getEntity() instanceof LivingEntity attacker && attacker != this) {
                 onAttacked(attacker);
             }
@@ -331,6 +364,14 @@ public abstract class PrehistoricEntity extends TamableAnimal {
 
     /** Reaccion al ser atacado. Por defecto, avisa a los de su especie para que reaccionen. */
     protected void onAttacked(LivingEntity attacker) {
+        // Cuidado parental: si atacan a una cria, quien puso su huevo acude a defenderla.
+        if (isYoung()) {
+            PrehistoricEntity parent = getParentEntity();
+            if (parent != null && attacker != parent) {
+                parent.setLastHurtByMob(attacker);
+                if (parent.isCarnivore() || parent.species().warnRadius() > 0) parent.setTarget(attacker);
+            }
+        }
         if (isTame()) return;
         double r = species().alertRadius();
         for (PrehistoricEntity other : level().getEntitiesOfClass(PrehistoricEntity.class,
@@ -397,6 +438,11 @@ public abstract class PrehistoricEntity extends TamableAnimal {
                     playWarnSound();
                     return InteractionResult.CONSUME;
                 }
+                if (method == TameMethod.TRUST && tameCooldown > 0) {
+                    player.displayClientMessage(Component.translatable("prehistoricsurvival.message.too_soon",
+                            (tameCooldown + 19) / 20), true);
+                    return InteractionResult.CONSUME;
+                }
                 if (tameCooldown > 0) return InteractionResult.CONSUME;
                 if (!player.getAbilities().instabuild) stack.shrink(1);
                 feedForTaming(player);
@@ -413,7 +459,11 @@ public abstract class PrehistoricEntity extends TamableAnimal {
         int progress = Math.min(100, getTameProgress() + gain);
         setTameProgress(progress);
         addHunger(species().foodValue());
-        tameCooldown = tameMethod() == TameMethod.SEDATE ? 60 : 100;
+        tameCooldown = switch (tameMethod()) {
+            case SEDATE -> 60;
+            case TRUST -> 3000;      // la confianza necesita tiempo: una comida cada 2,5 minutos
+            default -> 100;
+        };
         gameEvent(GameEvent.EAT);
 
         if (progress >= 100) {
@@ -447,9 +497,14 @@ public abstract class PrehistoricEntity extends TamableAnimal {
     public Component getDisplayName() {
         MutableComponent text = Component.empty();
         if (isAlpha()) {
-            text.append(Component.translatable("prehistoricsurvival.label.alpha")).append(Component.literal(" "));
+            text.append(Component.translatable("prehistoricsurvival.label.alpha")
+                    .withStyle(ChatFormatting.GOLD, ChatFormatting.BOLD)).append(Component.literal(" "));
         }
         text.append(super.getDisplayName());
+        if (getStage() != GrowthStage.ADULT) {
+            text.append(Component.literal(" (")).append(Component.translatable(getStage() == GrowthStage.BABY
+                    ? "prehistoricsurvival.stage.baby" : "prehistoricsurvival.stage.teen")).append(Component.literal(")"));
+        }
         text.append(Component.literal("  Lv." + getCreatureLevel()));
         text.append(Component.literal("  " + Math.round(getHealth()) + "/" + Math.round(getMaxHealth()) + " \u2665"));
         if (!isTame() && getTameProgress() > 0) {
@@ -461,7 +516,31 @@ public abstract class PrehistoricEntity extends TamableAnimal {
 
     @Override
     protected void playStepSound(BlockPos pos, BlockState state) {
-        playSound(net.minecraft.sounds.SoundEvents.CHICKEN_STEP, 0.15f, 1.0f);
+        SoundEvent step = getStepSoundEvent();
+        float size = Mth.clamp(getBodyScale() * species().modelScale(), 0.1f, 3.0f);
+        float volume = Mth.clamp(0.12f + size * 0.2f, 0.12f, 1.0f);
+        float pitch = Mth.clamp(1.35f - size * 0.3f, 0.7f, 1.4f) + (getRandom().nextFloat() - 0.5f) * 0.1f;
+        playSound(step != null ? step : SoundEvents.CHICKEN_STEP, volume, pitch);
+    }
+
+    /** Sonido de pisada propio de la especie (null = el generico). */
+    @Nullable
+    protected SoundEvent getStepSoundEvent() {
+        return null;
+    }
+
+    /** Las crias y adolescentes tienen voz mas aguda; los alfas, mas grave y potente. */
+    @Override
+    public float getVoicePitch() {
+        float pitch = super.getVoicePitch();
+        if (getStage() == GrowthStage.JUVENILE) pitch *= 1.2f;
+        if (isAlpha()) pitch *= 0.78f;
+        return pitch;
+    }
+
+    @Override
+    protected float getSoundVolume() {
+        return isAlpha() ? 1.5f : 1.0f;
     }
 
     // ------------------------------------------------------------------ guardado
@@ -479,6 +558,7 @@ public abstract class PrehistoricEntity extends TamableAnimal {
         tag.putInt("TameProgress", getTameProgress());
         tag.putInt("BreedCooldown", breedCooldown);
         tag.putInt("Sedated", sedatedTicks);
+        if (parentUUID != null) tag.putUUID("Parent", parentUUID);
         if (nestPos != null) {
             tag.putInt("NestX", nestPos.getX());
             tag.putInt("NestY", nestPos.getY());
@@ -516,6 +596,7 @@ public abstract class PrehistoricEntity extends TamableAnimal {
         setTameProgress(tag.getInt("TameProgress"));
         breedCooldown = tag.getInt("BreedCooldown");
         sedatedTicks = tag.getInt("Sedated");
+        parentUUID = tag.hasUUID("Parent") ? tag.getUUID("Parent") : null;
         nestPos = tag.contains("NestX") ? new BlockPos(tag.getInt("NestX"), tag.getInt("NestY"), tag.getInt("NestZ")) : null;
         pregnantTicks = tag.contains("Pregnant") ? tag.getInt("Pregnant") : -1;
         fatherLevel = tag.contains("FatherLevel") ? tag.getInt("FatherLevel") : 1;
@@ -564,12 +645,14 @@ public abstract class PrehistoricEntity extends TamableAnimal {
         int variant = r.nextInt(10) < 9 ? (r.nextBoolean() ? getVariant() : fatherVariant) : r.nextInt(variantCount());
         boolean female = r.nextBoolean();
 
+        String id = EntityType.getKey(getType()).toString();
+        boolean nested = server.getBlockState(pos.below()).getBlock() instanceof NestBlock;
         server.setBlock(pos, ModBlocks.DINO_EGG.get().defaultBlockState()
-                .setValue(com.prehistoricsurvival.block.DinoEggBlock.KIND,
-                        com.prehistoricsurvival.block.DinoEggBlock.kindOf(EntityType.getKey(getType()).toString())), 3);
+                .setValue(DinoEggBlock.KIND, DinoEggBlock.kindOf(id))
+                .setValue(DinoEggBlock.NESTED, nested), 3);
         if (server.getBlockEntity(pos) instanceof DinoEggBlockEntity egg) {
-            egg.setup(EntityType.getKey(getType()).toString(), species().incubationTicks(),
-                    lvl, variant, female, alpha, isTame() ? getOwnerUUID() : null);
+            egg.setup(id, species().incubationTicks(), lvl, variant, female, alpha,
+                    isTame() ? getOwnerUUID() : null, getUUID());
         }
         this.nestPos = pos.immutable();
         return true;
@@ -689,5 +772,61 @@ public abstract class PrehistoricEntity extends TamableAnimal {
     protected void dropCustomDeathLoot(DamageSource source, int looting, boolean recentlyHit) {
         super.dropCustomDeathLoot(source, looting, recentlyHit);
         if (isAlpha()) spawnAtLocation(ModItems.ALPHA_ESSENCE.get());
+    }
+
+    // ------------------------------------------------------------------ familia, nidos y vista previa
+
+    public void setParent(@Nullable UUID parent) { this.parentUUID = parent; }
+    @Nullable public UUID getParentUUID() { return parentUUID; }
+
+    /** El progenitor que puso el huevo, si sigue vivo y cargado (solo en el servidor). */
+    @Nullable
+    public PrehistoricEntity getParentEntity() {
+        if (parentUUID == null || !(level() instanceof ServerLevel server)) return null;
+        Entity e = server.getEntity(parentUUID);
+        return e instanceof PrehistoricEntity p && p.isAlive() ? p : null;
+    }
+
+    /** Tipo de nido preferido de la especie. */
+    public Block preferredNest() {
+        return ModBlocks.nestFor(EntityType.getKey(getType()).toString());
+    }
+
+    private void tryPlaceWildNest() {
+        if (!(level() instanceof ServerLevel server)) return;
+        this.fatherLevel = getCreatureLevel();
+        this.fatherVariant = getVariant();
+        BlockPos base = blockPosition();
+        for (int i = 0; i < 20; i++) {
+            BlockPos column = base.offset(getRandom().nextInt(9) - 4, 0, getRandom().nextInt(9) - 4);
+            for (int dy = 2; dy >= -2; dy--) {
+                BlockPos g = column.offset(0, dy, 0);
+                BlockState below = server.getBlockState(g.below());
+                if (server.getBlockState(g).isAir() && server.getBlockState(g.above()).isAir()
+                        && server.getBlockState(g.above(2)).isAir() && server.getFluidState(g).isEmpty()
+                        && below.isFaceSturdy(server, g.below(), Direction.UP)
+                        && !(below.getBlock() instanceof NestBlock)) {
+                    server.setBlock(g, preferredNest().defaultBlockState(), 3);
+                    layEgg(g.above());
+                    return;
+                }
+            }
+        }
+    }
+
+    /** Fija la etapa y el alfa para mostrar la criatura en el libro-guia (sin efectos en el juego). */
+    public void previewStage(GrowthStage stage, boolean alpha) {
+        SpeciesData s = species();
+        int ticks = switch (stage) {
+            case BABY -> s.babyTicks() / 2;
+            case JUVENILE -> s.babyTicks() + s.juvenileTicks() / 2;
+            case ADULT -> s.adultTicks();
+        };
+        this.growthTicks = ticks;
+        this.entityData.set(DATA_GROWTH, ticks);
+        this.lastStage = getStage();
+        setAlpha(alpha);
+        setHunger(100);
+        refreshDimensions();
     }
 }

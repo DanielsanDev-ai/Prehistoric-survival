@@ -1,11 +1,14 @@
 package com.prehistoricsurvival.client.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.prehistoricsurvival.PrehistoricSurvival;
+import com.prehistoricsurvival.entity.DilophosaurusEntity;
 import com.prehistoricsurvival.entity.EntityAction;
 import com.prehistoricsurvival.entity.GrowthStage;
 import com.prehistoricsurvival.entity.PrehistoricEntity;
@@ -21,46 +24,80 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
 /**
- * Modelo generico de dinosaurio bipedo carnivoro. La geometria de cada especie (velociraptor, T. rex)
- * viene de TheropodSpecs (generado), asi que el modelo y la textura siempre coinciden.
- * Incluye un modelo de cria con proporciones propias (cabeza grande, patas cortas, sin brazos).
+ * Modelo generico de dinosaurio bipedo carnivoro. La geometria de cada especie (velociraptor, T. rex,
+ * dilophosaurus) viene de TheropodSpecs (generado), asi que el modelo y la textura siempre coinciden.
+ * Tres modelos independientes: adulto, adolescente (proporciones juveniles) y cria (cabeza grande, sin brazos).
+ * Las piezas "a_*" (puas y cuernos) solo se muestran en los alfas.
  */
 public class TheropodModel<T extends PrehistoricEntity> extends EntityModel<T> {
-    public static final ModelLayerLocation RAPTOR_LAYER =
-            new ModelLayerLocation(new ResourceLocation(PrehistoricSurvival.MOD_ID, "velociraptor"), "main");
-    public static final ModelLayerLocation REX_LAYER =
-            new ModelLayerLocation(new ResourceLocation(PrehistoricSurvival.MOD_ID, "tyrannosaurus"), "main");
+    public static final ModelLayerLocation RAPTOR_LAYER = layer("velociraptor");
+    public static final ModelLayerLocation REX_LAYER = layer("tyrannosaurus");
+    public static final ModelLayerLocation DILO_LAYER = layer("dilophosaurus");
+
+    private static ModelLayerLocation layer(String name) {
+        return new ModelLayerLocation(new ResourceLocation(PrehistoricSurvival.MOD_ID, name), "main");
+    }
+
+    /** Referencias a las piezas animadas de un modelo (adulto o adolescente). */
+    private static final class Rig {
+        final ModelPart group;
+        final ModelPart neck, neck2, head, jaw, tail1, tail2, tail3;
+        final ModelPart thighR, thighL, lowerR, lowerL, footR, footL, armR, armL;
+        final ModelPart frillR, frillL;
+        final List<ModelPart> alphaParts = new ArrayList<>();
+
+        Rig(Map<String, ModelPart> map, ModelPart group, String pre) {
+            this.group = group;
+            neck = map.get(pre + "neck");
+            neck2 = map.get(pre + "neck2");
+            head = map.get(pre + "head");
+            jaw = map.get(pre + "jaw");
+            tail1 = map.get(pre + "tail1");
+            tail2 = map.get(pre + "tail2");
+            tail3 = map.get(pre + "tail3");
+            thighR = map.get(pre + "thigh_r");
+            thighL = map.get(pre + "thigh_l");
+            lowerR = map.get(pre + "lower_r");
+            lowerL = map.get(pre + "lower_l");
+            footR = map.get(pre + "foot_r");
+            footL = map.get(pre + "foot_l");
+            armR = map.get(pre + "arm_r");
+            armL = map.get(pre + "arm_l");
+            frillR = map.get(pre + "frill_r");   // null en las especies sin gorguera
+            frillL = map.get(pre + "frill_l");
+            for (Map.Entry<String, ModelPart> e : map.entrySet()) {
+                if (e.getKey().startsWith(pre + "a_")) alphaParts.add(e.getValue());
+            }
+        }
+    }
 
     private final TheropodSpecs.Spec spec;
-    private final ModelPart root, adult, baby;
-    private final ModelPart neck, head, jaw, tail1, tail2;
-    private final ModelPart thighR, thighL, lowerR, lowerL, footR, footL, armR, armL;
+    private final ModelPart root;
+    private final ModelPart adultGroup, teenGroup, babyGroup;
+    private final Rig adultRig, teenRig;
     private final ModelPart bHead, bTail, bLegR, bLegL;
 
     public TheropodModel(ModelPart root, TheropodSpecs.Spec spec) {
         this.spec = spec;
         this.root = root;
-        this.adult = root.getChild("adult");
-        this.baby = root.getChild("baby");
+        this.adultGroup = root.getChild("adult");
+        this.teenGroup = root.getChild("teen");
+        this.babyGroup = root.getChild("baby");
 
-        this.neck = adult.getChild("neck");
-        this.head = neck.getChild("head");
-        this.jaw = head.getChild("jaw");
-        this.tail1 = adult.getChild("tail1");
-        this.tail2 = tail1.getChild("tail2");
-        this.thighR = adult.getChild("thigh_r");
-        this.thighL = adult.getChild("thigh_l");
-        this.lowerR = thighR.getChild("lower_r");
-        this.lowerL = thighL.getChild("lower_l");
-        this.footR = lowerR.getChild("foot_r");
-        this.footL = lowerL.getChild("foot_l");
-        this.armR = adult.getChild("arm_r");
-        this.armL = adult.getChild("arm_l");
+        Map<String, ModelPart> map = new HashMap<>();
+        map.put("adult", adultGroup);
+        map.put("teen", teenGroup);
+        map.put("baby", babyGroup);
+        for (TheropodSpecs.Part p : spec.adult) map.put(p.name, map.get(p.parent).getChild(p.name));
+        for (TheropodSpecs.Part p : spec.teen) map.put(p.name, map.get(p.parent).getChild(p.name));
+        for (TheropodSpecs.Part p : spec.baby) map.put(p.name, map.get(p.parent).getChild(p.name));
 
-        this.bHead = baby.getChild("b_head");
-        this.bTail = baby.getChild("b_tail");
-        this.bLegR = baby.getChild("b_leg_r");
-        this.bLegL = baby.getChild("b_leg_l");
+        this.adultRig = new Rig(map, adultGroup, "");
+        this.teenRig = new Rig(map, teenGroup, "t_");
+        this.bHead = map.get("b_head");
+        this.bTail = map.get("b_tail");
+        this.bLegR = map.get("b_leg_r");
+        this.bLegL = map.get("b_leg_l");
     }
 
     public static LayerDefinition createLayer(TheropodSpecs.Spec spec) {
@@ -68,8 +105,10 @@ public class TheropodModel<T extends PrehistoricEntity> extends EntityModel<T> {
         PartDefinition root = mesh.getRoot();
         Map<String, PartDefinition> defs = new HashMap<>();
         defs.put("adult", root.addOrReplaceChild("adult", CubeListBuilder.create(), PartPose.ZERO));
+        defs.put("teen", root.addOrReplaceChild("teen", CubeListBuilder.create(), PartPose.ZERO));
         defs.put("baby", root.addOrReplaceChild("baby", CubeListBuilder.create(), PartPose.ZERO));
         for (TheropodSpecs.Part p : spec.adult) addPart(defs, p);
+        for (TheropodSpecs.Part p : spec.teen) addPart(defs, p);
         for (TheropodSpecs.Part p : spec.baby) addPart(defs, p);
         return LayerDefinition.create(mesh, spec.texW, spec.texH);
     }
@@ -84,24 +123,22 @@ public class TheropodModel<T extends PrehistoricEntity> extends EntityModel<T> {
     @Override
     public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float age,
                           float netHeadYaw, float headPitch) {
-        boolean isBaby = entity.getStage() == GrowthStage.BABY;
-        adult.visible = !isBaby;
-        baby.visible = isBaby;
+        GrowthStage stage = entity.getStage();
+        adultGroup.visible = stage == GrowthStage.ADULT;
+        teenGroup.visible = stage == GrowthStage.JUVENILE;
+        babyGroup.visible = stage == GrowthStage.BABY;
 
         EntityAction action = entity.getAction();
         boolean asleep = action == EntityAction.SLEEPING;
-        boolean eating = action == EntityAction.EATING;
-        boolean threat = action == EntityAction.THREAT;
         boolean crouch = asleep || action == EntityAction.LAYING || entity.isInSittingPose();
-
         float swing = crouch ? 0f : limbSwing * spec.swingSpeed;
         float amt = crouch ? 0f : limbSwingAmount;
         float s = swing * 0.6662f;
         float yaw = netHeadYaw * Mth.DEG_TO_RAD;
         float pitch = Mth.clamp(headPitch, -35f, 35f) * Mth.DEG_TO_RAD;
 
-        if (isBaby) {
-            baby.y = crouch ? 3f : 0f;
+        if (stage == GrowthStage.BABY) {
+            babyGroup.y = crouch ? 3f : 0f;
             bLegR.visible = !crouch;
             bLegL.visible = !crouch;
             bLegR.xRot = Mth.cos(s) * 1.2f * amt;
@@ -110,7 +147,7 @@ public class TheropodModel<T extends PrehistoricEntity> extends EntityModel<T> {
             if (asleep) {
                 bHead.xRot = 0.5f;
                 bHead.yRot = 0f;
-            } else if (eating) {
+            } else if (action == EntityAction.EATING) {
                 bHead.xRot = 0.8f + Mth.sin(age * 0.9f) * 0.3f;
                 bHead.yRot = 0f;
             } else {
@@ -120,60 +157,97 @@ public class TheropodModel<T extends PrehistoricEntity> extends EntityModel<T> {
             return;
         }
 
-        adult.y = crouch ? spec.crouchY : 0f;
+        Rig rig = stage == GrowthStage.ADULT ? adultRig : teenRig;
+        animate(rig, entity, action, crouch, s, amt, age, yaw, pitch);
+    }
 
-        // piernas: postura de dedos (digitigrada) con la rodilla doblada y el pie siempre plano
+    private void animate(Rig r, T entity, EntityAction action, boolean crouch, float s, float amt,
+                         float age, float yaw, float pitch) {
+        boolean asleep = action == EntityAction.SLEEPING;
+        boolean eating = action == EntityAction.EATING;
+        boolean threat = action == EntityAction.THREAT;
+        boolean spitting = action == EntityAction.SPITTING;
+
+        r.group.y = crouch ? spec.crouchY : 0f;
+        for (ModelPart part : r.alphaParts) part.visible = entity.isAlpha();
+
+        // ---- patas: postura de dedos (digitigrada), rodilla doblada y pie siempre plano
         if (crouch) {
-            thighR.xRot = -1.3f;
-            thighL.xRot = -1.3f;
-            lowerR.xRot = 2.2f;
-            lowerL.xRot = 2.2f;
-            footR.xRot = -0.9f;
-            footL.xRot = -0.9f;
+            r.thighR.xRot = -1.3f;
+            r.thighL.xRot = -1.3f;
+            r.lowerR.xRot = 2.2f;
+            r.lowerL.xRot = 2.2f;
+            r.footR.xRot = -0.9f;
+            r.footL.xRot = -0.9f;
         } else {
-            thighR.xRot = -0.3f + Mth.cos(s) * spec.stride * amt;
-            thighL.xRot = -0.3f + Mth.cos(s + (float) Math.PI) * spec.stride * amt;
-            lowerR.xRot = 0.6f + Mth.cos(s - 1.0f) * 0.5f * amt;
-            lowerL.xRot = 0.6f + Mth.cos(s + (float) Math.PI - 1.0f) * 0.5f * amt;
-            footR.xRot = -(thighR.xRot + lowerR.xRot);
-            footL.xRot = -(thighL.xRot + lowerL.xRot);
+            r.thighR.xRot = -0.3f + Mth.cos(s) * spec.stride * amt;
+            r.thighL.xRot = -0.3f + Mth.cos(s + (float) Math.PI) * spec.stride * amt;
+            r.lowerR.xRot = 0.6f + Mth.cos(s - 1.0f) * 0.5f * amt;
+            r.lowerL.xRot = 0.6f + Mth.cos(s + (float) Math.PI - 1.0f) * 0.5f * amt;
+            r.footR.xRot = -(r.thighR.xRot + r.lowerR.xRot);
+            r.footL.xRot = -(r.thighL.xRot + r.lowerL.xRot);
         }
 
-        // brazos y cola
+        // ---- brazos y cola (la cola ondula con un retraso por segmento)
         float armPose = threat ? -1.0f : -0.5f + Mth.sin(age * 0.1f) * 0.04f;
-        armR.xRot = armPose;
-        armL.xRot = armPose;
-        tail1.xRot = threat ? -0.3f : -0.08f;
-        tail1.yRot = Mth.sin(s) * 0.2f * amt + Mth.sin(age * 0.08f) * 0.05f;
-        tail2.yRot = Mth.sin(s - 0.6f) * 0.3f * amt + Mth.sin(age * 0.08f - 0.5f) * 0.08f;
+        r.armR.xRot = armPose;
+        r.armL.xRot = armPose;
+        r.tail1.xRot = threat || spitting ? -0.3f : -0.08f;
+        r.tail1.yRot = Mth.sin(s) * 0.2f * amt + Mth.sin(age * 0.08f) * 0.05f;
+        r.tail2.yRot = Mth.sin(s - 0.6f) * 0.3f * amt + Mth.sin(age * 0.08f - 0.5f) * 0.08f;
+        r.tail3.yRot = Mth.sin(s - 1.2f) * 0.35f * amt + Mth.sin(age * 0.08f - 1.0f) * 0.1f;
 
-        // cuello, cabeza y mandibula
-        float lean = spec.neckLean;
+        // ---- cuello en S, cabeza y mandibula
+        float n1 = spec.neck1, n2 = spec.neck2, hr = spec.headRest;
+        float bob = Mth.cos(s * 2f) * 0.04f * amt;
         if (asleep) {
-            neck.xRot = 1.0f;
-            head.xRot = 0.3f;
-            head.yRot = 0f;
-            jaw.xRot = 0f;
+            r.neck.xRot = 1.1f;
+            r.neck2.xRot = -0.2f;
+            r.head.xRot = 0.4f;
+            r.head.yRot = 0f;
+            r.jaw.xRot = 0f;
         } else if (eating) {
-            neck.xRot = lean + 0.7f + Mth.sin(age * 0.8f) * 0.25f;
-            head.xRot = -lean * 0.3f;
-            head.yRot = 0f;
-            jaw.xRot = (Mth.sin(age * 1.6f) + 1f) * 0.25f;
+            r.neck.xRot = n1 + 0.6f + Mth.sin(age * 0.8f) * 0.2f;
+            r.neck2.xRot = n2 + 0.3f;
+            r.head.xRot = hr + 0.5f;
+            r.head.yRot = 0f;
+            r.jaw.xRot = (Mth.sin(age * 1.6f) + 1f) * 0.25f;
+        } else if (spitting) {
+            r.neck.xRot = n1 - 0.3f;                      // se echa hacia atras y suelta el veneno
+            r.neck2.xRot = n2 - 0.2f;
+            r.head.xRot = hr - 0.1f + Mth.sin(age * 0.8f) * 0.05f;
+            r.head.yRot = yaw;
+            r.jaw.xRot = 0.8f;
         } else if (threat) {
-            neck.xRot = lean + 0.5f;
-            head.xRot = -lean + pitch * 0.5f;
-            head.yRot = yaw;
-            jaw.xRot = 0.55f + Mth.sin(age * 0.5f) * 0.1f;
+            r.neck.xRot = n1 + 0.3f;
+            r.neck2.xRot = n2 - 0.1f;
+            r.head.xRot = hr + pitch * 0.5f;
+            r.head.yRot = yaw;
+            r.jaw.xRot = 0.55f + Mth.sin(age * 0.5f) * 0.1f;
         } else if (entity.isAggressive()) {
-            neck.xRot = lean + 0.3f;
-            head.xRot = -lean + pitch;
-            head.yRot = yaw;
-            jaw.xRot = (Mth.sin(age * 0.9f) + 1f) * 0.3f;
+            r.neck.xRot = n1 + 0.2f;
+            r.neck2.xRot = n2;
+            r.head.xRot = hr + pitch;
+            r.head.yRot = yaw;
+            r.jaw.xRot = (Mth.sin(age * 0.9f) + 1f) * 0.3f;
         } else {
-            neck.xRot = lean + Mth.cos(s * 2f) * 0.05f * amt;
-            head.xRot = -lean + pitch;
-            head.yRot = yaw;
-            jaw.xRot = 0f;
+            r.neck.xRot = n1 + bob;
+            r.neck2.xRot = n2;
+            r.head.xRot = hr + pitch;
+            r.head.yRot = yaw;
+            r.jaw.xRot = 0f;
+        }
+
+        // ---- gorguera del dilophosaurus: se despliega con suavidad y vibra al estar abierta
+        if (r.frillR != null && r.frillL != null) {
+            float amount = 0f;
+            if (entity instanceof DilophosaurusEntity dilo) amount = dilo.getFrill(age - entity.tickCount);
+            boolean open = amount > 0.03f;
+            r.frillR.visible = open;
+            r.frillL.visible = open;
+            float angle = Mth.lerp(amount, 1.45f, 0.1f) + Mth.sin(age * 1.5f) * 0.06f * amount;
+            r.frillR.yRot = angle;
+            r.frillL.yRot = -angle;
         }
     }
 

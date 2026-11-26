@@ -1,7 +1,10 @@
 package com.prehistoricsurvival.entity;
 
+import javax.annotation.Nullable;
+
 import com.prehistoricsurvival.entity.ai.EatCarcassGoal;
 import com.prehistoricsurvival.entity.ai.FleeWhenWoundedGoal;
+import com.prehistoricsurvival.entity.ai.FollowParentGoal;
 import com.prehistoricsurvival.entity.ai.HuntGoal;
 import com.prehistoricsurvival.entity.ai.HuntTargetGoal;
 import com.prehistoricsurvival.entity.ai.IntruderWarningGoal;
@@ -113,6 +116,7 @@ public class VelociraptorEntity extends PrehistoricEntity {
         this.goalSelector.addGoal(8, new SleepAtNightGoal(this));
         this.goalSelector.addGoal(9, new FollowOwnerGoal(this, 1.2, 8.0f, 2.5f, false));
         this.goalSelector.addGoal(10, new MateGoal(this));
+        this.goalSelector.addGoal(10, new FollowParentGoal(this, 1.2));
         this.goalSelector.addGoal(11, new StayNearNestGoal(this));
         this.goalSelector.addGoal(12, new StayNearHerdGoal(this, 1.0, 10.0));
         this.goalSelector.addGoal(13, new WaterAvoidingRandomStrollGoal(this, 0.8));
@@ -127,13 +131,13 @@ public class VelociraptorEntity extends PrehistoricEntity {
 
     @Override
     public boolean doHurtTarget(Entity target) {
-        playSound(ModSounds.RAPTOR_ATTACK.get(), getSoundVolume(), getVoicePitch());
+        playSound(isAlpha() ? ModSounds.RAPTOR_ATTACK_ALPHA.get() : ModSounds.RAPTOR_ATTACK.get(), getSoundVolume(), getVoicePitch());
         return super.doHurtTarget(target);
     }
 
     @Override
     public void playWarnSound() {
-        playSound(ModSounds.RAPTOR_WARN.get(), getSoundVolume(), getVoicePitch());
+        playSound(isAlpha() ? ModSounds.RAPTOR_WARN_ALPHA.get() : ModSounds.RAPTOR_WARN.get(), getSoundVolume(), getVoicePitch());
     }
 
     @Override
@@ -141,23 +145,25 @@ public class VelociraptorEntity extends PrehistoricEntity {
         playSound(ModSounds.RAPTOR_CALL.get(), 1.4f, getVoicePitch());
     }
 
+    @Nullable
+    @Override
+    protected SoundEvent getStepSoundEvent() {
+        return ModSounds.RAPTOR_STEP.get();
+    }
+
     @Override
     protected SoundEvent getAmbientSound() {
-        return isBaby() ? ModSounds.RAPTOR_CHICK.get() : ModSounds.RAPTOR_AMBIENT.get();
+        if (isBaby()) return ModSounds.RAPTOR_CHICK.get();
+        return isAlpha() ? ModSounds.RAPTOR_AMBIENT_ALPHA.get() : ModSounds.RAPTOR_AMBIENT.get();
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return ModSounds.RAPTOR_HURT.get();
+        return isAlpha() ? ModSounds.RAPTOR_HURT_ALPHA.get() : ModSounds.RAPTOR_HURT.get();
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return ModSounds.RAPTOR_DEATH.get();
-    }
-
-    @Override
-    public float getVoicePitch() {
-        return super.getVoicePitch() * (isAlpha() ? 0.8f : 1.0f);
+        return isAlpha() ? ModSounds.RAPTOR_DEATH_ALPHA.get() : ModSounds.RAPTOR_DEATH.get();
     }
 }

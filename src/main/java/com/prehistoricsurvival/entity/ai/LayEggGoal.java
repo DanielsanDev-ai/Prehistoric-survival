@@ -4,11 +4,13 @@ import java.util.EnumSet;
 
 import com.prehistoricsurvival.entity.EntityAction;
 import com.prehistoricsurvival.entity.PrehistoricEntity;
-import com.prehistoricsurvival.registry.ModBlocks;
+import com.prehistoricsurvival.block.NestBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 
 /**
  * La hembra gestante busca un nido (o, si no hay, un sitio llano y seco), se agacha unos segundos
@@ -76,11 +78,16 @@ public class LayEggGoal extends Goal {
     private BlockPos findSite() {
         Level level = mob.level();
         BlockPos base = mob.blockPosition();
+        Block preferred = mob.preferredNest();
+        BlockPos any = null;
         for (BlockPos p : BlockPos.betweenClosed(base.offset(-10, -3, -10), base.offset(10, 3, 10))) {
-            if (level.getBlockState(p).is(ModBlocks.NEST.get()) && level.getBlockState(p.above()).isAir()) {
-                return p.above().immutable();
+            BlockState st = level.getBlockState(p);
+            if (st.getBlock() instanceof NestBlock && level.getBlockState(p.above()).isAir()) {
+                if (st.is(preferred)) return p.above().immutable();   // el nido que mas le gusta
+                if (any == null) any = p.above().immutable();
             }
         }
+        if (any != null) return any;
         for (int i = 0; i < 12; i++) {
             BlockPos c = base.offset(mob.getRandom().nextInt(13) - 6, mob.getRandom().nextInt(3) - 1,
                     mob.getRandom().nextInt(13) - 6);

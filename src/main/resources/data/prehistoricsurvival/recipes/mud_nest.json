@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "S S",
+    "MMM"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "M": {
+      "item": "minecraft:mud"
+    }
+  },
+  "result": {
+    "item": "prehistoricsurvival:mud_nest"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "id": "sleep_noise",
+  "section": "behavior",
+  "order": 3,
+  "since": "0.3.0",
+  "title": {
+    "es": "Sueño y ruidos",
+    "en": "Sleep and noise"
+  },
+  "facts": [],
+  "text": [
+    {
+      "es": "De noche las criaturas se acuestan poco a poco (verás la postura de dormir). Se despiertan al amanecer, si alguien se acerca a menos de 5 bloques o si las atacan."
+    },
+    {
+      "es": "El T. rex es curioso: cuando oye combates a menos de 48 bloques va a investigar. Cuidado con las peleas cerca de su territorio."
+    },
+    {
+      "es": "Los herbívoros huyen de los depredadores y, si atacan a uno, toda la bandada reacciona."
+    }
+  ]
+}

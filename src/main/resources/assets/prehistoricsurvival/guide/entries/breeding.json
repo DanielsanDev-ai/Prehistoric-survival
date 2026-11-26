@@ -1,0 +1,38 @@
+{
+  "id": "breeding",
+  "section": "life",
+  "order": 5,
+  "since": "0.3.0",
+  "title": {
+    "es": "Reproducción y familia",
+    "en": "Breeding and family"
+  },
+  "facts": [
+    {
+      "es": "Hambre >= 70%"
+    },
+    {
+      "es": "1 huevo por puesta"
+    },
+    {
+      "es": "La madre protege"
+    }
+  ],
+  "text": [
+    {
+      "es": "Un macho y una hembra adultos pueden aparearse si están bien alimentados (hambre al 70% o más), sanos y sin haberse apareado hace poco. El macho busca a la hembra a menos de 20 bloques."
+    },
+    {
+      "es": "Tras aparearse hay una gestación (dodo 2,5 min, raptor y dilophosaurus 4 min, T. rex 6,5 min) y la hembra pone UN huevo, agachándose unos segundos. Nunca aparece directo en tu inventario."
+    },
+    {
+      "es": "Descanso hasta volver a aparearse: 20 min (T. rex, 40 min)."
+    },
+    {
+      "es": "Cuidado parental: la cría que nace sigue a su madre. La madre se queda cerca del nido, y si alguien ataca a una cría, ella acude a defenderla. Si te llevas el huevo, ¡puede atacarte!"
+    },
+    {
+      "es": "La cría hereda la genética: nivel (promedio de los padres), colores y una pequeña opción de alfa."
+    }
+  ]
+}

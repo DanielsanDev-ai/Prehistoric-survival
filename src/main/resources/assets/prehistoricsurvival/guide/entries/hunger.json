@@ -1,0 +1,32 @@
+{
+  "id": "hunger",
+  "section": "life",
+  "order": 6,
+  "since": "0.3.0",
+  "title": {
+    "es": "Hambre y alimentación",
+    "en": "Hunger and feeding"
+  },
+  "facts": [
+    {
+      "es": "Pastan / cazan"
+    },
+    {
+      "es": "Comen el cadáver"
+    }
+  ],
+  "text": [
+    {
+      "es": "Toda criatura tiene hambre. Baja con el tiempo; si llega a cero se debilita (sin llegar a morir de hambre, queda en 2 de vida) y deja de crecer. Con buen alimento se cura sola."
+    },
+    {
+      "es": "Los herbívoros pastan: buscan césped, se acercan, bajan la cabeza (verás la animación) y comen; el bloque se convierte en tierra."
+    },
+    {
+      "es": "Los carnívoros cazan cuando tienen hambre y se comen el cadáver de lo que abaten: no dejan el botín tirado, lo comen y dejan huesos y restos."
+    },
+    {
+      "es": "Puedes alimentar a tus criaturas domesticadas con su comida para curarlas y saciarlas."
+    }
+  ]
+}
