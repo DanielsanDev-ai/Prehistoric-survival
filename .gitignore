@@ -6,3 +6,4 @@ run/
 .eclipse/
 build_previews/
 tools/__pycache__/
+*.zip
